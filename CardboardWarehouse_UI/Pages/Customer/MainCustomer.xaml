@@ -1,0 +1,49 @@
+﻿<Page x:Class="CardboardWarehouse_UI.Pages.Customer.MainCustomer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CardboardWarehouse_UI.Pages.Customer"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainCustomer">
+
+    <Grid Background="Bisque">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="339*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Column="0">
+            <Button BorderThickness="0" Click="BtnToAddGift_Click"  Command="{Binding NavCommand}" Height="60" >
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\AddGiftImg.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Button BorderThickness="0" Click="BtnToFindCarton_Click"  Command="{Binding NavCommand}" Height="60" >
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\AddCartonImg.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <Button BorderThickness="0" Click="BtnToCart_Click"  Command="{Binding NavCommand}" Height="60">
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\SoopingCart.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="4" >
+            <Frame  x:Name="ContentFrame" />
+        </StackPanel>
+    </Grid>
+
+</Page>

@@ -1,0 +1,51 @@
+﻿<Page x:Class="CardboardWarehouse_UI.Pages.Admin.MainAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CardboardWarehouse_UI.Pages.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainAdmin">
+
+    <Grid Background="Beige">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+   
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+
+            <RowDefinition Height="339*"/>
+        </Grid.RowDefinitions>
+
+       
+        <StackPanel Grid.Column="0">
+            <Button BorderThickness="0"   Click="BtnToAddCarton_Click"  Command="{Binding NavC}" Height="60">
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\AddCartonImg.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Button BorderThickness="0"  Click="BtnToSystemEvent_Click"  Command="{Binding NavC}" Height="60" >
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\AdminLog.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <Button BorderThickness="0"  Click="BtnToEditStock_Click"  Command="{Binding NavC}" Height="60">
+                <Button.Background >
+                    <ImageBrush  ImageSource="C:\Users\97250\Desktop\הנדסת תוכנה\C#\C# תרגולים\CardboardWarehouse_UI\CardboardWarehouse_UI\Images\EditStock.png" Stretch="Uniform" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <Frame  x:Name="ContentFrame" />
+        </StackPanel>
+    </Grid>
+
+</Page>
