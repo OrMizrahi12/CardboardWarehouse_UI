@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CardboardWarehouse_DS;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.VisualBasic.FileIO;
 
 namespace CardboardWarehouse_UI.Pages.Admin
 {
@@ -21,9 +25,12 @@ namespace CardboardWarehouse_UI.Pages.Admin
     /// </summary>
     public partial class MainAdmin : Page
     {
+
         public MainAdmin()
         {
             InitializeComponent();
+      
+
         }
 
         private void BtnToEditStock_Click(object sender, RoutedEventArgs e)
@@ -41,5 +48,13 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             ContentFrame.Navigate(new Uri("Pages/Admin/LogEvent.xaml", UriKind.Relative));
         }
+
+
+
+
+       
+
     }
+
+
 }

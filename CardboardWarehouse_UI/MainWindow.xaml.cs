@@ -1,7 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿
+using CardboardWarehouse_DS;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,7 +27,7 @@ namespace CardboardWarehouse_UI
         public MainWindow()
         {
             InitializeComponent();
-
+            
         }
 
         private void BtnToAdmin_Click(object sender, RoutedEventArgs e)
@@ -36,7 +39,9 @@ namespace CardboardWarehouse_UI
         private void BtnToCustomer_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new Uri("Pages/Customer/MainCustomer.xaml", UriKind.Relative));
-
         }
+
+ 
+
     }
 }

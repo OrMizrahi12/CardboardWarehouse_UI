@@ -1,19 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\CardboardWarehouse_DB\CardboardWarehouse_DB.csproj" />
     <ProjectReference Include="..\CardboardWarehouse_DS\CardboardWarehouse_DS.csproj" />
-    <ProjectReference Include="..\CardboardWarehouse_Logic\CardboardWarehouse_Logic.csproj" />
   </ItemGroup>
 
 </Project>
