@@ -1,4 +1,7 @@
-﻿using CardboardWarehouse_DS;
+﻿using CardboardWarehouse_DB;
+using CardboardWarehouse_DS;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,25 +9,37 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.IO;
 
 namespace CardboardWarehouse_Logic
 {
     public class CartonDataController
     {
-        AvlTree _cartonsTree;
-        bool ok = true;
-        public CartonDataController()
+        static JsonLogic JsonLogic;
+        static HashTable  _cartonTable;
+        
+        static CartonDataController()
         {
-            _cartonsTree = new AvlTree();
+            _cartonTable = new HashTable(100);
+            JsonLogic = new JsonLogic();
+            Carton[] c = { new Carton(10, 101, 0), new Carton(120, 101, 0) };
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, c);
+            
+            LoadDataFromJson();
         }
         public void LoadDataToGrid(DataGrid grid)
         {
-            if (ok)
-            {
-                _cartonsTree.LoadInitalData();
-            }
-            ok = false;
-            LoadDataToGrid(grid, _cartonsTree.Root);
+            Carton[] c = { new Carton(10, 101, 0), new Carton(120, 101, 0) };
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, c);
+            LoadDataFromJson();
+
+            _cartonTable.LoadDataToGrid(grid);
+
+        }
+
+        static public void LoadDataFromJson()
+        {
+            _cartonTable.cartons = JsonLogic.LoadJsonToTree(_cartonTable.cartons, PathInfo.CartonJsonPath);
         }
         public void LoadDataToGrid(DataGrid grid, Carton travel)
         {
@@ -32,9 +47,9 @@ namespace CardboardWarehouse_Logic
             {
                 return;
             }
-            LoadDataToGrid(grid, travel.Left);
-            grid.Items.Add(new Carton(travel.X,travel.Y, travel.Count));
-            LoadDataToGrid(grid, travel.Right);
+            //LoadDataToGrid(grid, travel.Left);
+            //grid.Items.Add(new Carton(travel.X,travel.Y, travel.Count));
+            //LoadDataToGrid(grid, travel.Right);
 
         }
 
@@ -42,7 +57,7 @@ namespace CardboardWarehouse_Logic
         {
             if(NotNull(carton))
             {
-                _cartonsTree.Add(carton);
+                _cartonTable.Add(carton);
             }
         }
 
@@ -50,7 +65,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                _cartonsTree.Delete(carton); 
+                _cartonTable.Remove(carton); 
             }
         }
 
@@ -58,7 +73,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                return _cartonsTree.Get(carton);
+                return _cartonTable.Get(carton.X, carton.Y);
             }
             else
             {
@@ -71,10 +86,15 @@ namespace CardboardWarehouse_Logic
             return carton != null; 
         }
 
-        public void UpdateStocK(bool increment,Carton carton)
-        {
-            _cartonsTree.UpdateStocK(increment, carton);
-        }
+        //public void UpdateStocK(bool increment,Carton carton)
+        //{
+        //    _cartonTable.UpdateStocK(increment, carton);
+        //}
+
+        //public void UpdateJsonCartonData()
+        //{
+        //    JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, _cartonTable.Root); 
+        //}
 
     }
 }

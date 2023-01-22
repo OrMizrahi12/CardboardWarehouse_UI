@@ -8,6 +8,6 @@ namespace CardboardWarehouse_DB
 {
     public class Data
     {
-        
+       
     }
 }

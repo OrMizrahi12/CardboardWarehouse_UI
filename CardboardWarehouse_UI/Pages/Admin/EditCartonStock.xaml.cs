@@ -26,6 +26,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             InitializeComponent();
             cartonDataController.LoadDataToGrid(CartonsGrid);
+            
         }
 
 
@@ -54,7 +55,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-                cartonDataController.UpdateStocK(true, SelectedCarton);
+              //  cartonDataController.UpdateStocK(true, SelectedCarton);
             }
             CartonsGrid.Items.Clear();
             cartonDataController.LoadDataToGrid(CartonsGrid);
@@ -64,7 +65,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-                cartonDataController.UpdateStocK(false, SelectedCarton);
+               // cartonDataController.UpdateStocK(false, SelectedCarton);
             }
             CartonsGrid.Items.Clear();
             cartonDataController.LoadDataToGrid(CartonsGrid);

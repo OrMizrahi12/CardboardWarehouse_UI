@@ -10,19 +10,18 @@ namespace CardboardWarehouse_DS
     {
 
 
-        private double _x;
-        private double _y;
+        private int _x;
+        private int _y;
         private int _count;
 
-        public Carton Left { get; set; }
-        public Carton Right { get; set; }
+ 
 
         public int Count { get { return _count; } set { _count = value; } }
 
-        public double X { get => _x; set { } }
-        public double Y { get => _y; set { } }
+        public int X { get => _x; set { } }
+        public int Y { get => _y; set { } }
 
-        public Carton(double x, double y, int count)
+        public Carton(int x, int y, int count)
         {
             _x = x;
             _y = y;
