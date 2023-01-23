@@ -14,28 +14,43 @@ using System.Xml;
 
 namespace CardboardWarehouse_Logic
 {
+    
     public class JsonLogic
     {
-        public void UpdateCartonDataInJson(string path, Carton[] cartons)
+        CartonDataController cartonDataController = new CartonDataController();
+        public void UpdateCartonDataInJson(string path)
         {
-            // Serialize CartonHashTable to JSON
-            string json = JsonConvert.SerializeObject(cartons);
+            //Serialize CartonHashTable to JSON
+            string json = JsonConvert.SerializeObject(GeneralTreeInstance.Cartons);
 
             // Write JSON to file
             File.WriteAllText(path, json);
         }
 
-        public Carton[] LoadJsonToTree(Carton[] cartons, string path)
+        public Carton[] LoadJsonToTree( string path)
         {
             
             string json = File.ReadAllText(path);
 
 
-            cartons = JsonConvert.DeserializeObject<Carton[]>(json);
-            return cartons; 
+            Carton[] ? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
+
+            if (cartons != null)
+            {
+                for (int i = 0; i < cartons.Length; i++)
+                {
+                    if (cartons[i] != null)
+                    {
+                        if (GeneralTreeInstance.Cartons != null)
+                        {
+                            cartonDataController.AddCarton(cartons[i]);
+                        }
+
+                    }
+                }
+            }
+
+            return cartons!; 
         }
-
-
-
     }
 }

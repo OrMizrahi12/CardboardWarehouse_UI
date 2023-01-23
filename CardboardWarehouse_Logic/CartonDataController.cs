@@ -20,18 +20,15 @@ namespace CardboardWarehouse_Logic
         
         static CartonDataController()
         {
-            _cartonTable = new HashTable(100);
+            _cartonTable = new HashTable();
             JsonLogic = new JsonLogic();
-            Carton[] c = { new Carton(10, 101, 0), new Carton(120, 101, 0) };
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, c);
-            
             LoadDataFromJson();
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
         }
         public void LoadDataToGrid(DataGrid grid)
         {
-            Carton[] c = { new Carton(10, 101, 0), new Carton(120, 101, 0) };
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, c);
             LoadDataFromJson();
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
 
             _cartonTable.LoadDataToGrid(grid);
 
@@ -39,7 +36,7 @@ namespace CardboardWarehouse_Logic
 
         static public void LoadDataFromJson()
         {
-            _cartonTable.cartons = JsonLogic.LoadJsonToTree(_cartonTable.cartons, PathInfo.CartonJsonPath);
+            JsonLogic.LoadJsonToTree(PathInfo.CartonJsonPath);
         }
         public void LoadDataToGrid(DataGrid grid, Carton travel)
         {
@@ -58,6 +55,7 @@ namespace CardboardWarehouse_Logic
             if(NotNull(carton))
             {
                 _cartonTable.Add(carton);
+                JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
             }
         }
 
@@ -65,7 +63,8 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                _cartonTable.Remove(carton); 
+                _cartonTable.Remove(carton);
+                JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
             }
         }
 
@@ -81,20 +80,35 @@ namespace CardboardWarehouse_Logic
             }
         }
 
+        public void IncrementStock(Carton carton)
+        {
+            if (NotNull(carton))
+            {
+                _cartonTable.Get(carton.X, carton.Y).Count++;
+            }
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+
+        }
+
+        public void DicrementCarton(Carton carton)
+        {
+            if (NotNull(carton) && carton.Count > 1)
+            {
+                _cartonTable.Get(carton.X, carton.Y).Count--;
+            }
+            else if(NotNull(carton) && carton.Count == 1)
+            {
+                _cartonTable.Remove(carton); 
+            }
+            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+
+        }
+
         private bool NotNull(Carton carton)
         {
             return carton != null; 
         }
 
-        //public void UpdateStocK(bool increment,Carton carton)
-        //{
-        //    _cartonTable.UpdateStocK(increment, carton);
-        //}
-
-        //public void UpdateJsonCartonData()
-        //{
-        //    JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath, _cartonTable.Root); 
-        //}
 
     }
 }

@@ -5,24 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Windows.Controls;
+using CardboardWarehouse_DB;
 
 namespace CardboardWarehouse_DS
 {
     public class HashTable
     {
-        private Carton[] table;
-        private int size;
+        private Carton[]  table = GeneralTreeInstance.Cartons;
+        private int size =  GeneralTreeInstance.Cartons.Length;
         private int[] keys;
         private int _itensCount;
         public int ItemCount { get { return _itensCount; } }
         public Carton[] cartons { get { return table; } set { } }
-        public HashTable(int size)
+        public HashTable()
         {
-            this.size = size;
-            table = new Carton[size];
-            keys = new int[size];
+            size = table.Length;
+            keys = new int[table.Length];
         }
-        private int GetIndex(int x, int y)
+        public int GetIndex(int x, int y)
         {
             string key = $"{x}{y}";
             byte[] byteKey = Encoding.UTF8.GetBytes(key);
@@ -161,5 +161,6 @@ namespace CardboardWarehouse_DS
                 }
             }
         }
+
     }
 }

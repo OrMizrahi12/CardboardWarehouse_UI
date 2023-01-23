@@ -55,7 +55,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-              //  cartonDataController.UpdateStocK(true, SelectedCarton);
+                cartonDataController.IncrementStock(SelectedCarton);
             }
             CartonsGrid.Items.Clear();
             cartonDataController.LoadDataToGrid(CartonsGrid);
@@ -65,7 +65,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-               // cartonDataController.UpdateStocK(false, SelectedCarton);
+                cartonDataController.DicrementCarton(SelectedCarton);
             }
             CartonsGrid.Items.Clear();
             cartonDataController.LoadDataToGrid(CartonsGrid);
