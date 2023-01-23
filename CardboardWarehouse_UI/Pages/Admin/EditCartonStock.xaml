@@ -8,23 +8,27 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditCartonStock">
 
-    <Grid>
+    <Grid Width="1000">
         <Label Content="Edit Stock" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,401"/>
-        <DataGrid Width="250" MouseDoubleClick="CartonSelected" x:Name="CartonsGrid" Margin="452,121,98,68"  IsReadOnly="True" RowHeaderWidth="0" >
+        <DataGrid MouseDoubleClick="CartonSelected" x:Name="CartonsGrid" Margin="398,121,200,68"  IsReadOnly="True" RowHeaderWidth="0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
                 <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Creation Time" Binding="{Binding CreationTime}"/>
+                <DataGridTextColumn Header="LastA ction" Binding="{Binding LastAction}"/>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"/>
+                <DataGridTextColumn Header="Expiry In Deys" Binding="{Binding ExpiryDateInDeys}"/>
             </DataGrid.Columns>
+            // ExpiryDateInDeys
 
         </DataGrid>
         <Button x:Name="BtnDeletCarton" Background="DarkRed" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="608,93,0,0" Click="BtnDeletCarton_Click"  />
         <Button x:Name="BtnIncrement" Background="Green" Content="Increment" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="455,93,0,0" Click="BtnIncrement_Click"  />
         <Button x:Name="BtnDecrement" Content="Decrement" Background="DarkCyan" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="529,93,0,0" Click="BtnDecrement_Click"  />
-        <TextBox x:Name="TxtX" Width="100" Height="30" Margin="286,285,414,135" />
-        <TextBox x:Name="TxtY" Width="100" Height="30" Margin="286,222,414,198" />
-        <TextBox x:Name="TxtCount" Width="100" Height="30" Margin="286,163,414,257" />
-        <Button Width="100" x:Name="BtnAddCarton" Content="Add" Background="DarkGreen" Height="30" Margin="286,338,414,82" Click="BtnAddCarton_Click"  />
+        <TextBox x:Name="TxtX" Width="100" Height="30" Margin="268,271,632,149" />
+        <TextBox x:Name="TxtY" Width="100" Height="30" Margin="268,208,632,212" />
+        <TextBox x:Name="TxtCount" Width="100" Height="30" Margin="268,149,632,271" />
+        <Button Width="100" x:Name="BtnAddCarton" Content="Add" Background="DarkGreen" Height="30" Margin="268,324,632,96" Click="BtnAddCarton_Click"  />
     </Grid>
 </Page>

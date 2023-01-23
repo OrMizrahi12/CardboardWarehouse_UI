@@ -106,7 +106,7 @@ namespace CardboardWarehouse_DS
 
         public Carton GetClosestCarton(int x, int y)
         {
-            Carton closestCarton = new Carton(short.MaxValue, short.MaxValue, 0);
+            Carton closestCarton = new Carton(short.MaxValue, short.MaxValue, 0, DateTime.Now);
             for (int i = 0; i < _table.Length; i++)
             {
                 if (_table[i] != null)

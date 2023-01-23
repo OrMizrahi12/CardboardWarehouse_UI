@@ -80,7 +80,9 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                _cartonTable.Get(carton.X, carton.Y).Count++;
+                Carton pointer = _cartonTable.Get(carton.X, carton.Y);
+                pointer.Count++;
+                UpdateCartonLastAction(pointer);
             }
             JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
         }
@@ -97,6 +99,12 @@ namespace CardboardWarehouse_Logic
             }
             JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
 
+        }
+
+        // All perches i updating the last action
+        public static void UpdateCartonLastAction(Carton carton)
+        {
+            carton.LastAction = DateTime.Now;
         }
 
         private static bool NotNull(Carton carton)

@@ -13,20 +13,23 @@ namespace CardboardWarehouse_DS
         private int _x;
         private int _y;
         private int _count;
-        private DateTime _dateOnly;
+        private DateTime _creationTime;
+        private DateTime _lastAction;
 
         public int Count { get { return _count; } set { _count = value; } }
         public int X { get => _x; set { } }
         public int Y { get => _y; set { } }
-        public DateTime Date { get { return _dateOnly; } }
-
-        public Carton(int x, int y, int count)
+        public DateTime CreationTime { get { return _creationTime; } }
+        public DateTime ExpiryDate { get { return LastAction.AddDays(5); } }
+        public TimeSpan ExpiryDateInDeys { get { return ExpiryDate - LastAction; } } 
+        public DateTime LastAction { get { return _lastAction; } set { _lastAction = value; } }
+        
+        public Carton(int x, int y, int count, DateTime creationTime)
         {
             _x = x;
             _y = y;
             _count = count;
-            // Todo Date time
-            _dateOnly = DateTime.Now;
+            _creationTime = creationTime;
         }
 
 

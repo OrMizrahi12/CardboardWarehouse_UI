@@ -68,7 +68,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
 
         private void BtnAddCarton_Click(object sender, RoutedEventArgs e)
         {
-            CartonDataController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text)));
+            CartonDataController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text), DateTime.Now));
             ClearCartonGrid();
             CartonDataController.LoadDataToGrid(CartonsGrid);
         }
