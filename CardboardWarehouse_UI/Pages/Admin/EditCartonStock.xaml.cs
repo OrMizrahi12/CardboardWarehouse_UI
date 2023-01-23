@@ -20,16 +20,11 @@ namespace CardboardWarehouse_UI.Pages.Admin
 
     public partial class EditCartonStock : Page
     {
-        readonly CartonDataController cartonDataController = new CartonDataController();
-
         public EditCartonStock()
         {
             InitializeComponent();
-            cartonDataController.LoadDataToGrid(CartonsGrid);
-            
+            CartonDataController.LoadDataToGrid(CartonsGrid);
         }
-
-
 
         private void CartonSelected(object sender, MouseButtonEventArgs e)
         {
@@ -44,10 +39,10 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-                cartonDataController.DeleteCarton(SelectedCarton);
+                CartonDataController.DeleteCarton(SelectedCarton);
             }
-            CartonsGrid.Items.Clear();
-            cartonDataController.LoadDataToGrid(CartonsGrid);
+            ClearCartonGrid();
+            CartonDataController.LoadDataToGrid(CartonsGrid);
 
         }
 
@@ -55,27 +50,32 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-                cartonDataController.IncrementStock(SelectedCarton);
+                CartonDataController.IncrementStock(SelectedCarton);
             }
-            CartonsGrid.Items.Clear();
-            cartonDataController.LoadDataToGrid(CartonsGrid);
+            ClearCartonGrid();
+            CartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
         private void BtnDecrement_Click(object sender, RoutedEventArgs e)
         {
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
-                cartonDataController.DicrementCarton(SelectedCarton);
+                CartonDataController.DicrementCarton(SelectedCarton);
             }
-            CartonsGrid.Items.Clear();
-            cartonDataController.LoadDataToGrid(CartonsGrid);
+            ClearCartonGrid();
+            CartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
         private void BtnAddCarton_Click(object sender, RoutedEventArgs e)
         {
-            cartonDataController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text)));
+            CartonDataController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text)));
+            ClearCartonGrid();
+            CartonDataController.LoadDataToGrid(CartonsGrid);
+        }
+
+        private void ClearCartonGrid()
+        {
             CartonsGrid.Items.Clear();
-            cartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
     }

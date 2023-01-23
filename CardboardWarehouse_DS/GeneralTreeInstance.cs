@@ -10,8 +10,7 @@ namespace CardboardWarehouse_DS
     {
         public static Carton ? GeneralRoot { get; set; }
 
-        private static Carton[] _cartons = new Carton[100];
-        public static bool InitialLoad { get { return true; } set { } }
+        private static readonly Carton[] _cartons = new Carton[100];
 
         public static Carton[]? Cartons { get { return _cartons; } set { } }
 

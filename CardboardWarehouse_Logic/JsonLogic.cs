@@ -17,17 +17,13 @@ namespace CardboardWarehouse_Logic
     
     public class JsonLogic
     {
-        CartonDataController cartonDataController = new CartonDataController();
-        public void UpdateCartonDataInJson(string path)
+        public static void UpdateJsonData(string path)
         {
-            //Serialize CartonHashTable to JSON
             string json = JsonConvert.SerializeObject(GeneralTreeInstance.Cartons);
-
-            // Write JSON to file
             File.WriteAllText(path, json);
         }
 
-        public Carton[] LoadJsonToTree( string path)
+        public static Carton[] LoadDataFromJson( string path)
         {
             
             string json = File.ReadAllText(path);
@@ -43,7 +39,7 @@ namespace CardboardWarehouse_Logic
                     {
                         if (GeneralTreeInstance.Cartons != null)
                         {
-                            cartonDataController.AddCarton(cartons[i]);
+                            CartonDataController.AddCarton(cartons[i]);
                         }
 
                     }

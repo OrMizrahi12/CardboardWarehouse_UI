@@ -15,60 +15,56 @@ namespace CardboardWarehouse_Logic
 {
     public class CartonDataController
     {
-        static JsonLogic JsonLogic;
-        static HashTable  _cartonTable;
-        
+        static readonly HashTable  _cartonTable;
+
         static CartonDataController()
         {
             _cartonTable = new HashTable();
-            JsonLogic = new JsonLogic();
             LoadDataFromJson();
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
         }
-        public void LoadDataToGrid(DataGrid grid)
+        public static void LoadDataToGrid(DataGrid grid)
         {
             LoadDataFromJson();
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
-
+            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
             _cartonTable.LoadDataToGrid(grid);
-
         }
 
         static public void LoadDataFromJson()
         {
-            JsonLogic.LoadJsonToTree(PathInfo.CartonJsonPath);
+            JsonDataInformer.LoadDataFromJson(PathInfo.CartonJsonPath);
+           // JsonLogic.LoadJsonToTree(PathInfo.CartonJsonPath);
         }
-        public void LoadDataToGrid(DataGrid grid, Carton travel)
+        public static void LoadDataToGrid(DataGrid grid, Carton travel)
         {
             if(travel == null)
             {
-                return;
+               return;
             }
             //LoadDataToGrid(grid, travel.Left);
             //grid.Items.Add(new Carton(travel.X,travel.Y, travel.Count));
             //LoadDataToGrid(grid, travel.Right);
-
         }
 
-        public void AddCarton(Carton carton)
+        public static void AddCarton(Carton carton)
         {
             if(NotNull(carton))
             {
                 _cartonTable.Add(carton);
-                JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+                JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
             }
         }
 
-        public void DeleteCarton(Carton carton)
+        public static void DeleteCarton(Carton carton)
         {
             if (NotNull(carton))
             {
                 _cartonTable.Remove(carton);
-                JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+                JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
             }
         }
 
-        public Carton GetCarton(Carton carton)
+        public static Carton GetCarton(Carton carton)
         {
             if (NotNull(carton))
             {
@@ -80,17 +76,16 @@ namespace CardboardWarehouse_Logic
             }
         }
 
-        public void IncrementStock(Carton carton)
+        public static void IncrementStock(Carton carton)
         {
             if (NotNull(carton))
             {
                 _cartonTable.Get(carton.X, carton.Y).Count++;
             }
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
-
+            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
         }
 
-        public void DicrementCarton(Carton carton)
+        public static void DicrementCarton(Carton carton)
         {
             if (NotNull(carton) && carton.Count > 1)
             {
@@ -100,15 +95,13 @@ namespace CardboardWarehouse_Logic
             {
                 _cartonTable.Remove(carton); 
             }
-            JsonLogic.UpdateCartonDataInJson(PathInfo.CartonJsonPath);
+            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
 
         }
 
-        private bool NotNull(Carton carton)
+        private static bool NotNull(Carton carton)
         {
             return carton != null; 
         }
-
-
     }
 }

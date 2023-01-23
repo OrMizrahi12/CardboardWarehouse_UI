@@ -15,6 +15,7 @@
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
                 <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
             </DataGrid.Columns>
 
         </DataGrid>
