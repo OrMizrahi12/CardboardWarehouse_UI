@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_DS
 {
-    public class Carton
+    public class Carton : Cube
     {
-
-
         private int _x;
         private int _y;
         private int _count;
@@ -24,7 +22,7 @@ namespace CardboardWarehouse_DS
         public TimeSpan ExpiryDateInDeys { get { return ExpiryDate - LastAction; } } 
         public DateTime LastAction { get { return _lastAction; } set { _lastAction = value; } }
         
-        public Carton(int x, int y, int count, DateTime creationTime)
+        public Carton(int x, int y, int count, DateTime creationTime) : base(x, y)
         {
             _x = x;
             _y = y;
@@ -35,7 +33,7 @@ namespace CardboardWarehouse_DS
 
         public override string ToString()
         {
-            return $"({_x},{_y})";
+            return $"({_x},{_y}{_creationTime})";
         }
     }
 }

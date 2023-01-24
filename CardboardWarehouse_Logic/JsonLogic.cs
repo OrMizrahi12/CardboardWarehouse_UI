@@ -19,7 +19,7 @@ namespace CardboardWarehouse_Logic
     {
         public static void UpdateJsonData(string path)
         {
-            string json = JsonConvert.SerializeObject(GeneralTreeInstance.Cartons);
+            string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons);
             File.WriteAllText(path, json);
         }
 
@@ -37,9 +37,9 @@ namespace CardboardWarehouse_Logic
                 {
                     if (cartons[i] != null)
                     {
-                        if (GeneralTreeInstance.Cartons != null)
+                        if (GeneralDataHolder.Cartons != null)
                         {
-                            CartonDataController.AddCarton(cartons[i]);
+                            CartonController.AddCarton(cartons[i]);
                         }
 
                     }
@@ -50,3 +50,4 @@ namespace CardboardWarehouse_Logic
         }
     }
 }
+    

@@ -6,19 +6,11 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_DS
 {
-    public class GeneralTreeInstance
+    public class GeneralDataHolder
     {
         public static Carton ? GeneralRoot { get; set; }
-
         private static readonly Carton[] _cartons = new Carton[100];
-
         public static Carton[]? Cartons { get { return _cartons; } set { } }
-
-        public GeneralTreeInstance()
-        {
-
-        }
-        
-
+        public GeneralDataHolder() { }
     }
 }

@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Security.Cryptography;
 using System.Windows.Controls;
-using CardboardWarehouse_DB;
 
 namespace CardboardWarehouse_DS
 {
-    public class HashTable
+    public class GenericHash<T>
     {
-        private Carton[] _table;
+        private T[] _table;
         private int _size;
         private int _itensCount;
 
         public int ItemCount { get { return _itensCount; } }
-        public Carton[] Cartons { get { return _table; } set { } }
-        public HashTable()
+        public T[] Table { get { return _table; } set { } }
+        public GenericHash(T[] array)
         {
-            _size = GeneralDataHolder.Cartons!.Length;
-            _table = GeneralDataHolder.Cartons!;
+            _size = array.Length;
+            _table = array;
         }
-        public int GetIndex(int x, int y)
+        public int GetIndex(T item)
         {
-            string key = $"{x}{y}";
+            string key = item?.ToString()!;
             byte[] byteKey = Encoding.UTF8.GetBytes(key);
             byte[] hash;
             using (var sha256 = SHA256.Create())
@@ -40,11 +39,11 @@ namespace CardboardWarehouse_DS
             return Math.Abs(index % _size);
         }
 
-        public void Add(Carton carton)
+        public void Add(T item)
         {
             if (HashNotFull())
             {
-                int index = GetIndex(carton.X, carton.Y);
+                int index = GetIndex(item);
                 Console.WriteLine(index);
 
                 if (_table[index] == null)
@@ -52,7 +51,7 @@ namespace CardboardWarehouse_DS
                     _itensCount++;
                 }
 
-                _table[index] = carton;
+                _table[index] = item;
             }
             else
             {
@@ -61,20 +60,21 @@ namespace CardboardWarehouse_DS
 
         }
 
+
         public void Resize(int newSize)
         {
             if (!HashNotFull())
             {
-                Carton[] newTable = new Carton[newSize];
+                T[] newTable = new T[newSize];
                 Array.Copy(_table, newTable, Math.Min(_size, newSize));
                 _table = newTable;
                 _size = newSize;
             }
         }
 
-        public Carton Get(int x, int y)
+        public T Get(T element)
         {
-            int index = GetIndex(x, y);
+            int index = GetIndex(element);
 
             if (_table[index] != null)
             {
@@ -82,62 +82,34 @@ namespace CardboardWarehouse_DS
             }
             else
             {
-                return null!;
+                return default!;
             }
         }
 
-        public Carton Remove(Carton carton)
+        public T Remove(T item)
         {
-            int index = GetIndex(carton.X, carton.Y);
+            int index = GetIndex(item);
 
-            if (_table?[index] != null)
+            if (_table[index] != null)
             {
-                Carton deletedCarton = _table[index];
-                _table[index] = null!;
+                T deletedItem = _table[index];
+                _table[index] = default!;
                 _itensCount--;
-                return deletedCarton;
+                return deletedItem;
             }
             else
             {
-                return null!;
+                return default!;
             }
 
         }
-
-        public Carton GetClosestCarton(int x, int y)
-        {
-            Carton closestCarton = new Carton(short.MaxValue, short.MaxValue, 0, DateTime.Now);
-            for (int i = 0; i < _table.Length; i++)
-            {
-                if (_table[i] != null)
-                {
-                    if (_table[i].X > x && _table[i].X - x <= 10 && _table[i].Y > y && _table[i].Y - y <= 10)
-                    {
-                        if (closestCarton.X + closestCarton.Y > _table[i].X + _table[i].Y)
-                        {
-                            closestCarton = _table[i];
-                        }
-                    }
-                }
-            }
-
-            if (closestCarton.X == short.MaxValue)
-            {
-                return null!;
-            }
-            else
-            {
-                return closestCarton;
-            }
-        }
-
         public void PrintAll()
         {
             for (int i = 0; i < _table.Length; i++)
             {
                 if (_table[i] != null)
                 {
-                    Console.WriteLine("X: " + _table[i].X + ", Y: " + _table[i].Y);
+                    _table[i]?.ToString(); 
                 }
             }
         }
@@ -146,17 +118,15 @@ namespace CardboardWarehouse_DS
         {
             return _itensCount < _size - 1;
         }
-
         public void LoadDataToGrid(DataGrid dataGrid)
         {
             for (int i = 0; i < _size; i++)
             {
                 if (_table[i] != null)
                 {
-                    dataGrid.Items.Add(_table[i]); 
+                    dataGrid.Items.Add(_table[i]);
                 }
             }
         }
-
     }
 }
