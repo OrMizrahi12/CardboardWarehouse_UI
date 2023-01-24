@@ -99,15 +99,31 @@ namespace CardboardWarehouse_Logic
         {
             return carton != null;
         }
-        //public void LoadDataToGrid(DataGrid dataGrid)
-        //{
-        //    for (int i = 0; i < _size; i++)
-        //    {
-        //        if (_table[i] != null)
-        //        {
-        //            dataGrid.Items.Add(_table[i]);
-        //        }
-        //    }
-        //}
+        public static Carton GetClosestCarton(int x, int y)
+        {
+            Carton closestCarton = new Carton(short.MaxValue, short.MaxValue, 0, DateTime.Now);
+            for (int i = 0; i < _cartonTable.Table.Length; i++)
+            {
+                if (_cartonTable.Table[i] != null)
+                {
+                    if (_cartonTable.Table[i].X > x && _cartonTable.Table[i].X - x <= 10 && _cartonTable.Table[i].Y > y && _cartonTable.Table[i].Y - y <= 10)
+                    {
+                        if (closestCarton.X + closestCarton.Y > _cartonTable.Table[i].X + _cartonTable.Table[i].Y)
+                        {
+                            closestCarton = _cartonTable.Table[i];
+                        }
+                    }
+                }
+            }
+
+            if (closestCarton.X == short.MaxValue)
+            {
+                return null!;
+            }
+            else
+            {
+                return closestCarton;
+            }
+        }
     }
 }

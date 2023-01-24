@@ -24,7 +24,6 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             InitializeComponent();
             CartonController.LoadDataToGrid(CartonsGrid);
-            //CartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
         private void CartonSelected(object sender, MouseButtonEventArgs e)
@@ -33,7 +32,8 @@ namespace CardboardWarehouse_UI.Pages.Admin
             
             Carton? SelectedCarton = dg.SelectedItem as Carton;
 
-            MessageBox.Show(SelectedCarton?.X.ToString(), SelectedCarton?.Y.ToString());
+            RectanglePresent.Width = (double)(SelectedCarton?.X!);
+            RectanglePresent.Height= (double)(SelectedCarton?.Y!);
         }
 
         private void BtnDeletCarton_Click(object sender, RoutedEventArgs e)
@@ -41,11 +41,9 @@ namespace CardboardWarehouse_UI.Pages.Admin
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
                 CartonController.DeleteCarton(SelectedCarton);
-                //CartonDataController.DeleteCarton(SelectedCarton);
             }
             ClearCartonGrid();
             CartonController.LoadDataToGrid(CartonsGrid);
-           // CartonDataController.LoadDataToGrid(CartonsGrid);
 
         }
 
@@ -54,11 +52,9 @@ namespace CardboardWarehouse_UI.Pages.Admin
             if (CartonsGrid.SelectedItem is Carton SelectedCarton)
             {
                 CartonController.IncrementStock(SelectedCarton);
-                //CartonDataController.IncrementStock(SelectedCarton);
             }
             ClearCartonGrid();
             CartonController.LoadDataToGrid(CartonsGrid);
-            //CartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
         private void BtnDecrement_Click(object sender, RoutedEventArgs e)

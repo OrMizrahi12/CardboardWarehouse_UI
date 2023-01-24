@@ -9,7 +9,15 @@
       Title="FindCarton">
 
     <Grid>
-        <Label Content="Find Carton" HorizontalAlignment="Center" FontSize="30"/>
+        <Rectangle x:Name="RectanglePresent" Fill="Blue" Stroke="Black" StrokeThickness="4" RenderTransformOrigin="0.5,0.55" Margin="87,94,710,354" />
+        <Rectangle x:Name="RectangleMath" Fill="Blue" Stroke="Black" StrokeThickness="4" RenderTransformOrigin="0.454,4.538" Margin="85,350,712,229" />
 
+        <DataGrid MouseDoubleClick="GiftSelected" x:Name="GiftSGrid" Margin="493,94,91,94"  IsReadOnly="True" RowHeaderWidth="0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding X}" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
+                <DataGridTextColumn Header="Creation Time" Binding="{Binding CreationTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

@@ -10,14 +10,14 @@ namespace CardboardWarehouse_DS
     //public class AvlTree
     //{
 
-        
-        
-    //    Carton ? root = GeneralTreeInstance.GeneralRoot;
+
+
+    //    Carton? root = GeneralTreeInstance.GeneralRoot;
     //    public AvlTree()
     //    {
 
     //    }
-    //    public Carton ? Root { get { return root; } set { } }
+    //    public Carton? Root { get { return root; } set { } }
 
 
 
@@ -80,7 +80,7 @@ namespace CardboardWarehouse_DS
     //        }
     //        return current;
     //    }
-    //    public void Delete(Carton  target)
+    //    public void Delete(Carton target)
     //    {//and here
     //        root = Delete(root, target);
     //    }
@@ -213,7 +213,7 @@ namespace CardboardWarehouse_DS
     //        }
     //    }
 
- 
+
 
     //    public void UpdateStocK(bool increment, Carton carton)
     //    {
@@ -225,15 +225,15 @@ namespace CardboardWarehouse_DS
     //        }
     //        else
     //        {
-    //            if(carton.Count > 1)
+    //            if (carton.Count > 1)
     //            {
     //                carton.Count--;
     //            }
-    //            else if(carton.Count == 1)
+    //            else if (carton.Count == 1)
     //            {
     //                Delete(carton);
     //            }
-                
+
     //        }
     //    }
 

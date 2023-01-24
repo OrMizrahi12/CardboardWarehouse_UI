@@ -9,9 +9,15 @@
       Title="AddGift">
 
     <Grid>
-        <Label Content="Add Gift" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Margin="0,126,0,0"/>
-        <Label Content="Add Gift" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Margin="0,225,0,0"/>
-        <Label Content="Add Gift" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Margin="0,49,0,0"/>
-        <Label Content="Add Gift" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Margin="0,316,0,0"/>
+        <TextBox x:Name="TxtX" Width="100" Height="30" Margin="185,195,515,225" />
+        <TextBox x:Name="TxtY" Width="100" Height="30" Margin="185,130,515,290" />
+        <Button Width="100" x:Name="BtnAddGifts" Content="Add" Background="DarkGreen" Height="30" Margin="185,252,515,168" Click="BtnAddGift_Click"  />
+        <DataGrid MouseDoubleClick="GiftSelected" x:Name="GiftSGrid" Margin="493,94,91,94"  IsReadOnly="True" RowHeaderWidth="0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding X}" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
+                <DataGridTextColumn Header="Creation Time" Binding="{Binding CreationTime}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

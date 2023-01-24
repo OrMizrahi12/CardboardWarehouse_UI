@@ -49,17 +49,32 @@ namespace CardboardWarehouse_DS
                 if (_table[index] == null)
                 {
                     _itensCount++;
+                    _table[index] = item;
                 }
-
-                _table[index] = item;
+                else
+                {
+                    // the key is exsist? add the element to be the next (link list)
+                }
             }
             else
             {
                 Console.WriteLine("FULL");
             }
-
         }
 
+        private void FindOtherLocation(T? item)
+        {
+            for (int i = 0; i < _size; i++)
+            {
+                if (_table[i] == null)
+                {
+                    _table[i] = item!;
+                    _itensCount++;
+                   break;
+                }
+                break;
+            }
+        }
 
         public void Resize(int newSize)
         {
@@ -128,5 +143,7 @@ namespace CardboardWarehouse_DS
                 }
             }
         }
+
+        
     }
 }

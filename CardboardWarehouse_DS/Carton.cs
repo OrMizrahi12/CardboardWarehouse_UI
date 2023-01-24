@@ -33,7 +33,7 @@ namespace CardboardWarehouse_DS
 
         public override string ToString()
         {
-            return $"({_x},{_y}{_creationTime})";
+            return $"({_x},{_y})";
         }
     }
 }

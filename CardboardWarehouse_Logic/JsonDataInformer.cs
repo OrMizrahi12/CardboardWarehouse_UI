@@ -17,5 +17,9 @@ namespace CardboardWarehouse_Logic
         {
             JsonLogic.LoadDataFromJson(path);
         }
+        public static void LoadGiftsFromJson(string path)
+        {
+            JsonLogic.LoadGiftsFromJson(path);
+        }
     }
 }

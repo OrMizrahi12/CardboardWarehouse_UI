@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CardboardWarehouse_DS;
+using CardboardWarehouse_Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,8 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             InitializeComponent();
         }
+
+
+ 
     }
 }

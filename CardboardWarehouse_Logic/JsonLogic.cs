@@ -19,8 +19,17 @@ namespace CardboardWarehouse_Logic
     {
         public static void UpdateJsonData(string path)
         {
-            string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons);
-            File.WriteAllText(path, json);
+            if(path == PathInfo.CartonJsonPath)
+            {
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons);
+                File.WriteAllText(path, json);
+            }
+            else if(path == PathInfo.GiftsJsonPath)
+            {
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.Gifts);
+                File.WriteAllText(path, json);
+            }
+
         }
 
         public static Carton[] LoadDataFromJson( string path)
@@ -47,6 +56,32 @@ namespace CardboardWarehouse_Logic
             }
 
             return cartons!; 
+        }
+
+        public static Gift[] LoadGiftsFromJson(string path)
+        {
+
+            string json = File.ReadAllText(path);
+
+
+            Gift[]? gifts = JsonConvert.DeserializeObject<Gift[]>(json);
+
+            if (gifts != null)
+            {
+                for (int i = 0; i < gifts.Length; i++)
+                {
+                    if (gifts[i] != null)
+                    {
+                        if (GeneralDataHolder.Gifts != null)
+                        {
+                            GiftController.AddGift(gifts[i]);
+                        }
+
+                    }
+                }
+            }
+
+            return gifts!;
         }
     }
 }

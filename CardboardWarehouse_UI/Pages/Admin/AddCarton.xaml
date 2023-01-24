@@ -9,6 +9,6 @@
       Title="AddCarton">
 
     <Grid>
-        <Label Content="Add Carton" FontSize="30" HorizontalAlignment="Center" />
+       
     </Grid>
 </Page>
