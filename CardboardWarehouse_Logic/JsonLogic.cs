@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using System.Xml;
+using CardboardWarehouse_Model;
 
 namespace CardboardWarehouse_Logic
 {
@@ -21,12 +22,22 @@ namespace CardboardWarehouse_Logic
         {
             if(path == PathInfo.CartonJsonPath)
             {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons);
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons.Table);
                 File.WriteAllText(path, json);
             }
             else if(path == PathInfo.GiftsJsonPath)
             {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.Gifts);
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.Gifts.Table);
+                File.WriteAllText(path, json);
+            }
+            else if(path == PathInfo.SoppingCartPath)
+            {
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.CartList.Items);
+                File.WriteAllText(path, json);
+            }
+            else if(path == PathInfo.PurchasePath)
+            {
+                string json = JsonConvert.SerializeObject(GeneralDataHolder.Purchase.Items);
                 File.WriteAllText(path, json);
             }
 
@@ -46,7 +57,7 @@ namespace CardboardWarehouse_Logic
                 {
                     if (cartons[i] != null)
                     {
-                        if (GeneralDataHolder.Cartons != null)
+                        if (GeneralDataHolder.Cartons.Table != null)
                         {
                             CartonController.AddCarton(cartons[i]);
                         }
@@ -64,6 +75,7 @@ namespace CardboardWarehouse_Logic
             string json = File.ReadAllText(path);
 
 
+            // its not gifts
             Gift[]? gifts = JsonConvert.DeserializeObject<Gift[]>(json);
 
             if (gifts != null)
@@ -83,6 +95,56 @@ namespace CardboardWarehouse_Logic
 
             return gifts!;
         }
+
+        public static Carton[] LoadCartFromJson(string path)
+        {
+
+            string json = File.ReadAllText(path);
+
+
+            Carton[]? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
+
+            if (cartons != null)
+            {
+                for (int i = 0; i < cartons.Length; i++)
+                {
+                    if (cartons[i] != null)
+                    {
+                        if (GeneralDataHolder.CartList.Items != null)
+                        {
+                            ShoppingCartController.AddToCart(cartons[i]);
+                        }
+
+                    }
+                }
+            }
+
+            return cartons!;
+        }
+
+        public static Purchase[] LoadPurchaseFromJson(string path)
+        {
+            Purchase[] ?purchases = JsonConvert.DeserializeObject<Purchase[]>(path);
+
+            if (purchases != null)
+            {
+                for (int i = 0; i < purchases.Length; i++)
+                {
+                    if (purchases[i] != null)
+                    {
+                        if (GeneralDataHolder.Purchase.Items != null)
+                        {
+                            PurchaseController.AddPurchase(purchases[i]);
+                        }
+
+                    }
+                }
+            }
+
+            return purchases!; 
+        }
+
+
     }
 }
     

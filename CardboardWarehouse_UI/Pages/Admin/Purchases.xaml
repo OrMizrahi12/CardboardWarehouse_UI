@@ -1,0 +1,25 @@
+﻿<Page x:Class="CardboardWarehouse_UI.Pages.Admin.Purchases"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CardboardWarehouse_UI.Pages.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Purchases">
+
+    <Grid>
+        <Grid>
+            <DataGrid x:Name="purchaseGrid" Margin="388,137,175,52"  IsReadOnly="True" RowHeaderWidth="0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="ItemCount" Binding="{Binding ItemCount}"/>
+                    <DataGridTextColumn Header="TotalPrice" Binding="{Binding TotalPrice}"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                </DataGrid.Columns>
+                // ExpiryDateInDeys// Id ItemCount TotalPrice Date
+
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

@@ -6,31 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using CardboardWarehouse_Model;
 
 namespace CardboardWarehouse_Logic
 {
     public class CartonController
     {
-        static readonly GenericHash<Carton> _cartonTable;
-
-        static CartonController()
-        {
-            _cartonTable = new GenericHash<Carton>(GeneralDataHolder.Cartons);
-            LoadDataFromJson();
-            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
-        }
         public static void LoadDataToGrid(DataGrid grid)
         {
             LoadDataFromJson();
             JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
-            _cartonTable.LoadDataToGrid(grid);
-
+            GeneralDataHolder.Cartons.LoadDataToGrid(grid);
         }
 
         static public void LoadDataFromJson()
         {
             JsonDataInformer.LoadDataFromJson(PathInfo.CartonJsonPath);
-            //JsonLogic.LoadJsonToTree(PathInfo.CartonJsonPath);
         }
 
 
@@ -38,7 +29,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                _cartonTable.Add(carton);
+                GeneralDataHolder.Cartons.Add(carton);
                 JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
             }
         }
@@ -47,7 +38,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                _cartonTable.Remove(carton);
+                GeneralDataHolder.Cartons.Remove(carton);
                 JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
             }
         }
@@ -56,7 +47,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                return _cartonTable.Get(carton);
+               return GeneralDataHolder.Cartons.Get(carton);
             }
             else
             {
@@ -68,7 +59,7 @@ namespace CardboardWarehouse_Logic
         {
             if (NotNull(carton))
             {
-                Carton pointer = _cartonTable.Get(carton);
+                Carton pointer = GeneralDataHolder.Cartons.Get(carton);
                 pointer.Count++;
                 UpdateCartonLastAction(pointer);
             }
@@ -77,19 +68,14 @@ namespace CardboardWarehouse_Logic
 
         public static void DicrementCarton(Carton carton)
         {
-            if (NotNull(carton) && carton.Count > 1)
+            if (NotNull(carton) && carton.Count > 0)
             {
-                _cartonTable.Get(carton).Count--;
-            }
-            else if (NotNull(carton) && carton.Count == 1)
-            {
-                _cartonTable.Remove(carton);
+                GeneralDataHolder.Cartons.Get(carton).Count--;
             }
             JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
 
         }
 
-        // All perches i updating the last action
         public static void UpdateCartonLastAction(Carton carton)
         {
             carton.LastAction = DateTime.Now;
@@ -101,16 +87,17 @@ namespace CardboardWarehouse_Logic
         }
         public static Carton GetClosestCarton(int x, int y)
         {
-            Carton closestCarton = new Carton(short.MaxValue, short.MaxValue, 0, DateTime.Now);
-            for (int i = 0; i < _cartonTable.Table.Length; i++)
-            {
-                if (_cartonTable.Table[i] != null)
+            Carton closestCarton = new(short.MaxValue, short.MaxValue, 0, DateTime.Now,0);
+            for (int i = 0; i < GeneralDataHolder.Cartons.Table.Length; i++)
+               {
+                
+                if (GeneralDataHolder.Cartons.Table[i] != null)
                 {
-                    if (_cartonTable.Table[i].X > x && _cartonTable.Table[i].X - x <= 10 && _cartonTable.Table[i].Y > y && _cartonTable.Table[i].Y - y <= 10)
+                    if (CheacCartonRange(GeneralDataHolder.Cartons.Table[i], x, y))
                     {
-                        if (closestCarton.X + closestCarton.Y > _cartonTable.Table[i].X + _cartonTable.Table[i].Y)
+                        if (IsBigger(closestCarton, GeneralDataHolder.Cartons.Table[i]))
                         {
-                            closestCarton = _cartonTable.Table[i];
+                            closestCarton = GeneralDataHolder.Cartons.Table[i];
                         }
                     }
                 }
@@ -123,6 +110,30 @@ namespace CardboardWarehouse_Logic
             else
             {
                 return closestCarton;
+            }
+        }
+
+        private static bool CheacCartonRange(Carton candidate, int x, int y)
+        {
+            if(candidate.X > x && candidate.X - x <= 10 && candidate.Y > y && candidate.Y - y <= 10)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool IsBigger(Carton closestCarton, Carton candidate)
+        {
+            if(closestCarton.X + closestCarton.Y > candidate.X + candidate.Y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

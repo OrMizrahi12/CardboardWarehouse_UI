@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CardboardWarehouse_DB\CardboardWarehouse_DB.csproj" />
     <ProjectReference Include="..\CardboardWarehouse_DS\CardboardWarehouse_DS.csproj" />
+    <ProjectReference Include="..\CardboardWarehouse_Model\CardboardWarehouse_Model.csproj" />
   </ItemGroup>
 
 </Project>

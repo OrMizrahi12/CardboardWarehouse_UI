@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,18 @@ namespace CardboardWarehouse_DS
 {
     public class GeneralDataHolder
     {
-        private static readonly Carton[] _cartons = new Carton[100];
-        public static Carton[]? Cartons { get { return _cartons; } set { } }
 
 
-        private static readonly Gift[] _gift = new Gift[100];
-        public static Gift[]? Gifts { get { return _gift; } set { } }
-        public GeneralDataHolder() { }
+        public static GenericHash<Carton> Cartons = new GenericHash<Carton>(100);
+
+
+        public static GenericHash<Gift> Gifts = new GenericHash<Gift>(100);
+
+        public static CustomList<Carton> CartList = new CustomList<Carton>();
+
+        public static CustomList<Purchase> Purchase = new CustomList<Purchase>();
+        public GeneralDataHolder()
+        {
+        }
     }
 }

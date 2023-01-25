@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CardboardWarehouse_Model;
 
 namespace CardboardWarehouse_UI.Pages.Customer
 {
@@ -28,19 +29,24 @@ namespace CardboardWarehouse_UI.Pages.Customer
         private void BtnAddGift_Click(object sender, RoutedEventArgs e)
         {
             GiftController.AddGift(new Gift(int.Parse(TxtX.Text), int.Parse(TxtY.Text), DateTime.Now));
-            ClearGiftGrid();
-            GiftController.LoadDataToGrid(GiftSGrid);
-        }
-
-
-        private void ClearGiftGrid()
-        {
-            GiftSGrid.Items.Clear();
+            RefreshGrid();
         }
 
         private void GiftSelected(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void BtnRemoveGift_Click(object sender, RoutedEventArgs e)
+        {
+            Gift? SelectedGift = GiftSGrid.SelectedItem as Gift;
+            GiftController.DeleteGift(SelectedGift!);
+            RefreshGrid(); 
+        }
+        private void RefreshGrid()
+        {
+            GiftSGrid.Items.Clear();
+            GiftController.LoadDataToGrid(GiftSGrid);
         }
     }
 }

@@ -10,11 +10,12 @@
 
     <Grid Width="1000">
         <Label Content="Edit Stock" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,401"/>
-        <DataGrid MouseDoubleClick="CartonSelected" x:Name="CartonsGrid" Margin="388,137,210,52"  IsReadOnly="True" RowHeaderWidth="0" >
+        <DataGrid MouseDoubleClick="CartonSelected" x:Name="CartonsGrid" Margin="388,137,175,52"  IsReadOnly="True" RowHeaderWidth="0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
                 <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="Creation Time" Binding="{Binding CreationTime}"/>
                 <DataGridTextColumn Header="LastA ction" Binding="{Binding LastAction}"/>
                 <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"/>
@@ -28,8 +29,9 @@
         <Button x:Name="BtnIncrement" Background="Green" Content="Increment" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,109,0,0" Click="BtnIncrement_Click"  />
         <Button x:Name="BtnDecrement" Content="Decrement" Background="DarkCyan" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="519,109,0,0" Click="BtnDecrement_Click"  />
         <TextBox x:Name="TxtX" Width="100" Height="30" Margin="258,210,642,210" />
-        <TextBox x:Name="TxtY" Width="100" Height="30" Margin="258,149,642,271" />
+        <TextBox x:Name="TxtY" Width="100" Height="30" Margin="258,157,642,263" />
         <TextBox x:Name="TxtCount" Width="100" Height="30" Margin="258,268,642,152" />
-        <Button Width="100" x:Name="BtnAddCarton" Content="Add" Background="DarkGreen" Height="30" Margin="258,340,642,80" Click="BtnAddCarton_Click"  />
+        <TextBox x:Name="TxtPrice" Width="100" Height="30" Margin="258,318,642,102" />
+        <Button Width="100" x:Name="BtnAddCarton" Content="Add" Background="DarkGreen" Height="30" Margin="258,368,642,52" Click="BtnAddCarton_Click"  />
     </Grid>
 </Page>

@@ -9,6 +9,16 @@
       Title="ShopingCart">
 
     <Grid>
-        <Label Content="Cart" HorizontalAlignment="Center" FontSize="30"/>
+        <DataGrid  x:Name="CartGrid" Margin="388,137,210,52"  IsReadOnly="True" RowHeaderWidth="0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding X}" />
+                <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnDeleteFromCart"  HorizontalAlignment="Left" VerticalAlignment="Top" Content="Delete From Cart" Background="DarkRed" Margin="388,112,0,0" Click="btnDeleteFromCart_Click"/>
+        <Label x:Name="totalPriceLabel" Content="Total Price: 0" HorizontalAlignment="Left" FontSize="30" Margin="51,137,0,0" VerticalAlignment="Top" />
+        <Button x:Name="BtnPay" Content="Pay" HorizontalAlignment="Left" Margin="219,357,0,0" VerticalAlignment="Top" Background="DarkGreen" Click="BtnPay_Click"/>
+
     </Grid>
 </Page>

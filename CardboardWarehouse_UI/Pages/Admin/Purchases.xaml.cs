@@ -1,5 +1,4 @@
-﻿using CardboardWarehouse_DS;
-using CardboardWarehouse_Logic;
+﻿using CardboardWarehouse_Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +17,14 @@ using System.Windows.Shapes;
 namespace CardboardWarehouse_UI.Pages.Admin
 {
     /// <summary>
-    /// Interaction logic for AddCarton.xaml
+    /// Interaction logic for Purchases.xaml
     /// </summary>
-    public partial class AddCarton : Page
+    public partial class Purchases : Page
     {
-        public AddCarton()
+        public Purchases()
         {
             InitializeComponent();
+            PurchaseController.LoadDataToGrid(purchaseGrid); 
         }
-
-
- 
     }
 }

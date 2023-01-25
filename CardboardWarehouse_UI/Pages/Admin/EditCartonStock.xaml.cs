@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CardboardWarehouse_Model;
 
 namespace CardboardWarehouse_UI.Pages.Admin
 {
@@ -71,11 +72,9 @@ namespace CardboardWarehouse_UI.Pages.Admin
 
         private void BtnAddCarton_Click(object sender, RoutedEventArgs e)
         {
-            CartonController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text), DateTime.Now));
-            //CartonDataController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text), DateTime.Now));
+            CartonController.AddCarton(new Carton(int.Parse(TxtX.Text), int.Parse(TxtY.Text), int.Parse(TxtCount.Text), DateTime.Now, int.Parse(TxtPrice.Text)));
             ClearCartonGrid();
             CartonController.LoadDataToGrid(CartonsGrid);
-            //CartonDataController.LoadDataToGrid(CartonsGrid);
         }
 
         private void ClearCartonGrid()

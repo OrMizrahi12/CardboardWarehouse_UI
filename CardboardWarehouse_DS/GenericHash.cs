@@ -16,10 +16,11 @@ namespace CardboardWarehouse_DS
 
         public int ItemCount { get { return _itensCount; } }
         public T[] Table { get { return _table; } set { } }
-        public GenericHash(T[] array)
+
+        public GenericHash(int size)
         {
-            _size = array.Length;
-            _table = array;
+            _size =size;
+            _table = new T[size];
         }
         public int GetIndex(T item)
         {

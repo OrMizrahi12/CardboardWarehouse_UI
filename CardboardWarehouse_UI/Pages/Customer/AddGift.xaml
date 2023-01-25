@@ -12,6 +12,7 @@
         <TextBox x:Name="TxtX" Width="100" Height="30" Margin="185,195,515,225" />
         <TextBox x:Name="TxtY" Width="100" Height="30" Margin="185,130,515,290" />
         <Button Width="100" x:Name="BtnAddGifts" Content="Add" Background="DarkGreen" Height="30" Margin="185,252,515,168" Click="BtnAddGift_Click"  />
+        <Button Width="100" x:Name="BtnRemoveGift" Content="Remove" Background="DarkRed" Height="30" Margin="493,59,207,361" Click="BtnRemoveGift_Click" />
         <DataGrid MouseDoubleClick="GiftSelected" x:Name="GiftSGrid" Margin="493,94,91,94"  IsReadOnly="True" RowHeaderWidth="0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />

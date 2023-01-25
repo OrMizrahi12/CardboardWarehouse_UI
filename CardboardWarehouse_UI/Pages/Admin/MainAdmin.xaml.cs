@@ -29,8 +29,6 @@ namespace CardboardWarehouse_UI.Pages.Admin
         public MainAdmin()
         {
             InitializeComponent();
-      
-
         }
 
         private void BtnToEditStock_Click(object sender, RoutedEventArgs e)
@@ -40,20 +38,13 @@ namespace CardboardWarehouse_UI.Pages.Admin
 
         private void BtnToAddCarton_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new Uri("Pages/Admin/AddCarton.xaml", UriKind.Relative));
-
+            ContentFrame.Navigate(new Uri("Pages/Admin/Purchases.xaml", UriKind.Relative));
         }
 
         private void BtnToSystemEvent_Click(object sender, RoutedEventArgs e)
         {
             ContentFrame.Navigate(new Uri("Pages/Admin/LogEvent.xaml", UriKind.Relative));
         }
-
-
-
-
-       
-
     }
 
 

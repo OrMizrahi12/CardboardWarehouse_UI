@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,18 @@ namespace CardboardWarehouse_Logic
         {
             JsonLogic.LoadDataFromJson(path);
         }
+
+        public static void LoadCartFromJson(string path)
+        {
+            JsonLogic.LoadCartFromJson(path);
+        }
         public static void LoadGiftsFromJson(string path)
         {
             JsonLogic.LoadGiftsFromJson(path);
+        }
+        public static void LoadPurchaseFromJson()
+        {
+            JsonLogic.LoadPurchaseFromJson(PathInfo.PurchasePath);
         }
     }
 }
