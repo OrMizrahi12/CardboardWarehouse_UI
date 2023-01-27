@@ -12,18 +12,19 @@ namespace CardboardWarehouse_Logic
 {
     public class PurchaseController
     {
-        // To fix!
         public static void LoadDataToGrid(DataGrid grid)
         {
             JsonDataInformer.LoadPurchaseFromJson();
             JsonLogic.UpdateJsonData(PathInfo.PurchasePath);
             LoadPurchaseGrid(grid);
+
         }
 
 
         static public void AddPurchase(Purchase purchase)
         {
             GeneralDataHolder.Purchase.Add(purchase);
+            JsonDataInformer.UpdateJsonData(PathInfo.PurchasePath);
             ShoppingCartController.ClearCart();
         }
 

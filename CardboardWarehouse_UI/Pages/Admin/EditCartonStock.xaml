@@ -10,7 +10,7 @@
 
     <Grid Width="1000">
         <Label Content="Edit Stock" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,401"/>
-        <DataGrid MouseDoubleClick="CartonSelected" x:Name="CartonsGrid" Margin="388,137,175,52"  IsReadOnly="True" RowHeaderWidth="0" >
+        <DataGrid MouseDoubleClick="CartonSelected" IsReadOnly="True" x:Name="CartonsGrid" ItemsSource="{Binding MyDataCollection}" Margin="445,144,206,67">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
@@ -18,11 +18,8 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="Creation Time" Binding="{Binding CreationTime}"/>
                 <DataGridTextColumn Header="LastA ction" Binding="{Binding LastAction}"/>
-                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"/>
-                <DataGridTextColumn Header="Expiry In Deys" Binding="{Binding ExpiryDateInDeys}"/>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding LastActionDays}"/>
             </DataGrid.Columns>
-            // ExpiryDateInDeys
-
         </DataGrid>
         <Rectangle x:Name="RectanglePresent" Width="0" Height="0" Fill="Blue" Stroke="Black" StrokeThickness="4" RenderTransformOrigin="0.5,0.55" Margin="32,149,768,201" />
         <Button x:Name="BtnDeletCarton" Background="DarkRed" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="598,109,0,0" Click="BtnDeletCarton_Click"  />
@@ -33,5 +30,12 @@
         <TextBox x:Name="TxtCount" Width="100" Height="30" Margin="258,268,642,152" />
         <TextBox x:Name="TxtPrice" Width="100" Height="30" Margin="258,318,642,102" />
         <Button Width="100" x:Name="BtnAddCarton" Content="Add" Background="DarkGreen" Height="30" Margin="258,368,642,52" Click="BtnAddCarton_Click"  />
+        <Button x:Name="BtnRemoveUnuse" Content="Remove Unuse" HorizontalAlignment="Left" Margin="708,109,0,0" VerticalAlignment="Top" Background="Red" Click="BtnRemoveUnuse_Click"/>
+        <Button x:Name="BtnUndo" Content="Undo" Background="DarkGoldenrod" HorizontalAlignment="Left" Margin="430,403,0,0" VerticalAlignment="Top" Width="69" Click="BtnUndo_Click"/>
+        <Button Content="Redo" Name="BtnRedo" Background="Green" HorizontalAlignment="Left" Margin="519,403,0,0" VerticalAlignment="Top" Width="65" Click="BtnRedo_Click"/>
+        <Label Content="X:" HorizontalAlignment="Left" Margin="233,161,0,0" VerticalAlignment="Top"/>
+        <Label Content="Y:" HorizontalAlignment="Left" Margin="233,210,0,0" VerticalAlignment="Top"/>
+        <Label Content="Count:" HorizontalAlignment="Left" Margin="208,272,0,0" VerticalAlignment="Top"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="211,322,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

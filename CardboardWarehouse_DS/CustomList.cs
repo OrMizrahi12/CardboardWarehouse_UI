@@ -50,15 +50,17 @@ namespace CardboardWarehouse_DS
             OnRemove?.Invoke(this, EventArgs.Empty);
         }
 
-        public bool Remove(T item)
+        public T Remove(T item)
         {
             var index = Array.IndexOf(_items, item);
             if (index >= 0)
             {
+                T itemToRemove = _items[index];
                 RemoveAt(index);
-                return true;
+
+                return itemToRemove;
             }
-            return false;
+            return default!;
         }
 
         public bool Contain(T element)
@@ -67,6 +69,9 @@ namespace CardboardWarehouse_DS
             {
                 if (item!.Equals(element))
                 {
+                    return true;
+                }
+                if(element!.ToString() == item.ToString()){
                     return true;
                 }
             }

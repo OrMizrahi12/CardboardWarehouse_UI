@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid>
-            <DataGrid x:Name="purchaseGrid" Margin="388,137,175,52"  IsReadOnly="True" RowHeaderWidth="0" >
+            <DataGrid x:Name="purchaseGrid" Margin="104,127,460,62"  IsReadOnly="True" RowHeaderWidth="0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="ItemCount" Binding="{Binding ItemCount}"/>
@@ -20,6 +20,20 @@
                 // ExpiryDateInDeys// Id ItemCount TotalPrice Date
 
             </DataGrid>
+            <DataGrid  x:Name="CopunGrid" Margin="597,200,63,134"  IsReadOnly="True" RowHeaderWidth="0" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Copun Name" Binding="{Binding CopunName}" />
+                    <DataGridTextColumn Header="Precent" Binding="{Binding Precent}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="Total Profit" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit" HorizontalAlignment="Left" Margin="146,72,0,0" VerticalAlignment="Top"/>
+            <Label Content="Add copun" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy" HorizontalAlignment="Left" Margin="597,72,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TxtCopunName" HorizontalAlignment="Left" Margin="573,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83"/>
+            <TextBox x:Name="TxtCopunPrecent" HorizontalAlignment="Left" Margin="671,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82"/>
+            <Button x:Name="BtnAddCopun" Background="DarkGreen" Content="Add copun" HorizontalAlignment="Left" Margin="604,169,0,0" VerticalAlignment="Top" Width="120" Click="BtnAddCopun_Click"/>
+            <Label Content="Copun Name" HorizontalAlignment="Left" Margin="574,115,0,0" VerticalAlignment="Top"/>
+            <Label Content="Precent" HorizontalAlignment="Left" Margin="687,115,0,0" VerticalAlignment="Top"/>
+            <Button Background="DarkRed" x:Name="BtnDeleeteCopun" Content="Delete Copun" HorizontalAlignment="Left" Margin="632,323,0,0" VerticalAlignment="Top" Click="BtnDeleeteCopun_Click"/>
         </Grid>
     </Grid>
 </Page>

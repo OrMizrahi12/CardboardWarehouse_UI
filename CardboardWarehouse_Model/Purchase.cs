@@ -24,5 +24,7 @@ namespace CardboardWarehouse_Model
         public int ItemCount { get { return _itemCount; } }
         public int TotalPrice { get { return _totalPrice; } }
         public DateTime Date { get { return _date; } }
+
+    
     }
 }

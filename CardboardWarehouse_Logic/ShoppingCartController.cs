@@ -12,9 +12,11 @@ namespace CardboardWarehouse_Logic
 {
     public class ShoppingCartController
     {
-        private static int _totalPrice; 
+        private static float _totalPrice; 
         public static int ItemsCount { get { return GeneralDataHolder.CartList.Count;} }
-        public static int TotalPrice { get { return _totalPrice; } }
+        public static float TotalPrice { get { return _totalPrice; } }
+
+        public static float Discount { get; private set; }
         public static void LoadDataToGrid(DataGrid grid)
         {
             LoadDataHelper(grid);
@@ -66,6 +68,33 @@ namespace CardboardWarehouse_Logic
         {
             GeneralDataHolder.CartList.Clear();
             _totalPrice = 0;
+        }
+
+        public static bool UpdateDiscount(string codeCopun)
+        {
+            Discount = CopunController.GetPrecent(codeCopun);
+
+            if(Discount != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }                          
+        public static float CulculateTotalPriceWithCopun()
+        {
+            if(Discount > 0)
+            {
+              
+                return TotalPrice * (100 - Discount) / 100;
+            }
+            else
+            {
+                return TotalPrice; 
+            }
+             
         }
     }
 }

@@ -9,16 +9,20 @@
       Title="ShopingCart">
 
     <Grid>
-        <DataGrid  x:Name="CartGrid" Margin="388,137,210,52"  IsReadOnly="True" RowHeaderWidth="0" >
+        <DataGrid  x:Name="CartGrid" Margin="388,137,334,52"  IsReadOnly="True" RowHeaderWidth="0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding X}" />
                 <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnDeleteFromCart"  HorizontalAlignment="Left" VerticalAlignment="Top" Content="Delete From Cart" Background="DarkRed" Margin="388,112,0,0" Click="btnDeleteFromCart_Click"/>
-        <Label x:Name="totalPriceLabel" Content="Total Price: 0" HorizontalAlignment="Left" FontSize="30" Margin="51,137,0,0" VerticalAlignment="Top" />
-        <Button x:Name="BtnPay" Content="Pay" HorizontalAlignment="Left" Margin="219,357,0,0" VerticalAlignment="Top" Background="DarkGreen" Click="BtnPay_Click"/>
+        <Button x:Name="btnDeleteFromCart"  HorizontalAlignment="Left" VerticalAlignment="Top" Content="Delete From Cart" Background="DarkRed" Margin="614,205,0,0" Click="btnDeleteFromCart_Click"/>
+        <Label x:Name="totalPriceLabel" Content="Total Price: 0" HorizontalAlignment="Left" FontSize="30" Margin="388,82,0,0" VerticalAlignment="Top" />
+        <Button x:Name="BtnPay" Content="Pay" HorizontalAlignment="Left" Margin="614,140,0,0" VerticalAlignment="Top" Background="DarkGreen" Click="BtnPay_Click" Height="46" Width="51"/>
+        <Label x:Name="TxtCopun" Content="You have copun ?" HorizontalAlignment="Left" Margin="117,140,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtAddCopun" HorizontalAlignment="Left" Margin="108,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnAddCodeCopun" Background="DarkGreen" Content="Add Code" HorizontalAlignment="Left" Margin="111,200,0,0" VerticalAlignment="Top" Width="117" Click="BtnAddCodeCopun_Click"/>
+        <Label x:Name="TxtSuccess" Content="" HorizontalAlignment="Left" Margin="117,234,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

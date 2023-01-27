@@ -6,4 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CardboardWarehouse_DS\CardboardWarehouse_DS.csproj" />
+    <ProjectReference Include="..\CardboardWarehouse_Model\CardboardWarehouse_Model.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,9 +13,11 @@ namespace CardboardWarehouse_DS
         private T[] _table;
         private int _size;
         private int _itensCount;
+       
 
         public int ItemCount { get { return _itensCount; } }
         public T[] Table { get { return _table; } set { } }
+
 
         public GenericHash(int size)
         {
@@ -52,10 +54,7 @@ namespace CardboardWarehouse_DS
                     _itensCount++;
                     _table[index] = item;
                 }
-                else
-                {
-                    // the key is exsist? add the element to be the next (link list)
-                }
+
             }
             else
             {

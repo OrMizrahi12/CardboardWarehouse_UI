@@ -46,13 +46,34 @@ namespace CardboardWarehouse_UI.Pages.Customer
         }
         private void RefrechTotalPrice()
         {
-            totalPriceLabel.Content = $"Total Price: {ShoppingCartController.TotalPrice}";
+            totalPriceLabel.Content = $"Total Price: {ShoppingCartController.CulculateTotalPriceWithCopun()}";
         }
 
         private void BtnPay_Click(object sender, RoutedEventArgs e)
         {
-            PurchaseController.AddPurchase(new Purchase(ShoppingCartController.ItemsCount, ShoppingCartController.TotalPrice, DateTime.UtcNow));
+            PurchaseController.AddPurchase(
+                new Purchase(
+                    ShoppingCartController.ItemsCount,
+                    (int)ShoppingCartController.CulculateTotalPriceWithCopun()
+                    , DateTime.UtcNow
+                    ));
             RefreshGrid();
+        }
+
+        private void BtnAddCodeCopun_Click(object sender, RoutedEventArgs e)
+        {
+           bool succuss = ShoppingCartController.UpdateDiscount(TxtAddCopun.Text);
+            if (succuss)
+            {
+                TxtSuccess.Content = $"You have copun of {ShoppingCartController.Discount}% !";
+                TxtSuccess.Foreground = Brushes.Green;
+            }
+            else
+            {
+                TxtSuccess.Content = $"Sorry, the code in not exsist.";
+                TxtSuccess.Foreground = Brushes.Red;
+            }
+            RefrechTotalPrice();
         }
     }
 }

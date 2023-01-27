@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CardboardWarehouse_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1003">
+        Title="MainWindow" Height="550" Width="1003">
 
     <Grid Width="1003">
         <Grid.RowDefinitions>

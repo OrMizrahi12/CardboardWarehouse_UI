@@ -114,7 +114,6 @@ namespace CardboardWarehouse_Logic
                         {
                             ShoppingCartController.AddToCart(cartons[i]);
                         }
-
                     }
                 }
             }
@@ -124,7 +123,10 @@ namespace CardboardWarehouse_Logic
 
         public static Purchase[] LoadPurchaseFromJson(string path)
         {
-            Purchase[] ?purchases = JsonConvert.DeserializeObject<Purchase[]>(path);
+            string json = File.ReadAllText(path);
+
+            Purchase[]? purchases = JsonConvert.DeserializeObject<Purchase[]>(json);
+            GeneralDataHolder.Purchase.Clear();
 
             if (purchases != null)
             {
@@ -141,7 +143,8 @@ namespace CardboardWarehouse_Logic
                 }
             }
 
-            return purchases!; 
+            return purchases!;
+
         }
 
 
