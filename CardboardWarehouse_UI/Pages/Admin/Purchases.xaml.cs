@@ -28,6 +28,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
             InitializeComponent();
             Vc = new ValidationController(2);
             LoadDataToGrid();
+            LoadBestSellerToGrid(); 
             RefreshCopunGrid();
         }
         private void LoadDataToGrid()
@@ -77,6 +78,17 @@ namespace CardboardWarehouse_UI.Pages.Admin
                 CopunController.DeleteCopun(copun);
                 RefreshCopunGrid();
             }
+        }
+        private void LoadBestSellerToGrid()
+        {
+            bestSellerGrid.Items.Clear();
+            BestSellersController.LoadDataToGrid(bestSellerGrid);
+        }
+
+        private void BtnReStock_Click(object sender, RoutedEventArgs e)
+        {
+            CartonController.ReStock();
+            MessageBox.Show("Your stock is updating!");
         }
     }
 }

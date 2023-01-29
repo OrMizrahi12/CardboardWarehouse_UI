@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,25 @@ using System.Windows.Shapes;
 
 namespace CardboardWarehouse_UI.Pages.Admin
 {
-    /// <summary>
-    /// Interaction logic for LogEvent.xaml
-    /// </summary>
+
     public partial class LogEvent : Page
     {
         public LogEvent()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private void BtnClearLogEvent_Click(object sender, RoutedEventArgs e)
+        {
+            LogEventController.ClearLogEvent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            systemEventGrid.Items.Clear();
+            LogEventController.LoadLogEventToGrid(systemEventGrid);
         }
     }
 }

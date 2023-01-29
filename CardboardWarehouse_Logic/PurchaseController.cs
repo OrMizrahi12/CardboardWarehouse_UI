@@ -25,7 +25,6 @@ namespace CardboardWarehouse_Logic
         {
             GeneralDataHolder.Purchase.Add(purchase);
             JsonDataInformer.UpdateJsonData(PathInfo.PurchasePath);
-            ShoppingCartController.ClearCart();
         }
 
         static public void LoadPurchaseGrid(DataGrid dataGrid)

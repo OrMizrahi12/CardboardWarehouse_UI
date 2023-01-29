@@ -27,6 +27,7 @@ namespace CardboardWarehouse_Logic
             {
                 GeneralDataHolder.Gifts.Add(gifts);
                 JsonLogic.UpdateJsonData(PathInfo.GiftsJsonPath);
+                LogEventController.AddLogEvent($"The gift {gifts} are added");
             }
         }
 
@@ -36,6 +37,8 @@ namespace CardboardWarehouse_Logic
             {
                 GeneralDataHolder.Gifts.Remove(gifts);
                 JsonLogic.UpdateJsonData(PathInfo.GiftsJsonPath);
+                LogEventController.AddLogEvent($"The gift {gifts} are deleted");
+
             }
         }
 

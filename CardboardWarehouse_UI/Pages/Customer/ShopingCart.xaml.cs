@@ -51,12 +51,19 @@ namespace CardboardWarehouse_UI.Pages.Customer
 
         private void BtnPay_Click(object sender, RoutedEventArgs e)
         {
-            PurchaseController.AddPurchase(
-                new Purchase(
-                    ShoppingCartController.ItemsCount,
-                    (int)ShoppingCartController.CulculateTotalPriceWithCopun()
-                    , DateTime.UtcNow
-                    ));
+            bool IsComplate = ShoppingCartController.GetPay(TxtPay.Text).isComplate;
+            int exsses = ShoppingCartController.GetPay(TxtPay.Text).exsses;
+
+            if (IsComplate)
+            {
+                MessageBox.Show($"Your exess is: {exsses}");
+                ShoppingCartController.FinishProccess();
+            }
+            else
+            {
+                MessageBox.Show("Pay as well.");
+            }
+                
             RefreshGrid();
         }
 

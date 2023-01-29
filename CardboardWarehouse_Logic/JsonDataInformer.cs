@@ -31,5 +31,10 @@ namespace CardboardWarehouse_Logic
         {
             JsonLogic.LoadPurchaseFromJson(PathInfo.PurchasePath);
         }
+
+        public static void LoadBestSellersFromJson(string path)
+        {
+            JsonLogic.LoadBestSellerFromJson(path); 
+        }
     }
 }

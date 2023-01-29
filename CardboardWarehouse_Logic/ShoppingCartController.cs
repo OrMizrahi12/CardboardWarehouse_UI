@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using CardboardWarehouse_Model;
+using System.Windows.Controls.Primitives;
+using System.Windows;
 
 namespace CardboardWarehouse_Logic
 {
@@ -93,8 +95,34 @@ namespace CardboardWarehouse_Logic
             else
             {
                 return TotalPrice; 
+            } 
+        }
+        public static void FinishProccess()
+        {
+            if(GeneralDataHolder.CartList.Count > 0)
+            {
+                foreach (var item in GeneralDataHolder.CartList.Items)
+                {
+                    BestSellersController.AddSell(item);
+                }
+
+                PurchaseController.AddPurchase(new Purchase(ShoppingCartController.ItemsCount, (int)ShoppingCartController.CulculateTotalPriceWithCopun(), DateTime.UtcNow));
+                LogEventController.AddLogEvent($"New purcace of {GeneralDataHolder.CartList.Items.Length} items");
+                
+                ClearCart();
+            }    
+        }
+
+        public static (int exsses, bool isComplate) GetPay(string pay)
+        {
+            if(int.TryParse(pay, out int res) && res >= CulculateTotalPriceWithCopun())
+            {
+                return (res - (int)CulculateTotalPriceWithCopun(), true);
             }
-             
+            else
+            {
+                return (0, false);
+            }
         }
     }
 }

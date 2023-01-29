@@ -20,134 +20,189 @@ namespace CardboardWarehouse_Logic
     {
         public static void UpdateJsonData(string path)
         {
-            if(path == PathInfo.CartonJsonPath)
+            try
             {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons.Table);
-                File.WriteAllText(path, json);
-            }
-            else if(path == PathInfo.GiftsJsonPath)
-            {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.Gifts.Table);
-                File.WriteAllText(path, json);
-            }
-            else if(path == PathInfo.SoppingCartPath)
-            {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.CartList.Items);
-                File.WriteAllText(path, json);
-            }
-            else if(path == PathInfo.PurchasePath)
-            {
-                string json = JsonConvert.SerializeObject(GeneralDataHolder.Purchase.Items);
-                File.WriteAllText(path, json);
-            }
-
-        }
-
-        public static Carton[] LoadDataFromJson( string path)
-        {
-            
-            string json = File.ReadAllText(path);
-
-
-            Carton[] ? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
-
-            if (cartons != null)
-            {
-                for (int i = 0; i < cartons.Length; i++)
+                if (path == PathInfo.CartonJsonPath)
                 {
-                    if (cartons[i] != null)
-                    {
-                        if (GeneralDataHolder.Cartons.Table != null)
-                        {
-                            CartonController.AddCarton(cartons[i]);
-                        }
+                    string json = JsonConvert.SerializeObject(GeneralDataHolder.Cartons.Table);
+                    File.WriteAllText(path, json);
+                }
+                else if (path == PathInfo.GiftsJsonPath)
+                {
+                    string json = JsonConvert.SerializeObject(GeneralDataHolder.Gifts.Table);
+                    File.WriteAllText(path, json);
+                }
+                else if (path == PathInfo.SoppingCartPath)
+                {
+                    string json = JsonConvert.SerializeObject(GeneralDataHolder.CartList.Items);
+                    File.WriteAllText(path, json);
+                }
+                else if (path == PathInfo.PurchasePath)
+                {
+                    string json = JsonConvert.SerializeObject(GeneralDataHolder.Purchase.Items);
+                    File.WriteAllText(path, json);
+                }
+                else if (path == PathInfo.BestSellerPath)
+                {
+                    string json = JsonConvert.SerializeObject(GeneralDataHolder.BestSellers.Items);
+                    File.WriteAllText(path, json);
 
-                    }
                 }
             }
+            catch
+            {
+                LogEventController.AddLogEvent("Path Error");
 
-            return cartons!; 
+            }
+           
+
         }
 
-        public static Gift[] LoadGiftsFromJson(string path)
+        public static void LoadDataFromJson( string path)
         {
 
-            string json = File.ReadAllText(path);
-
-
-            // its not gifts
-            Gift[]? gifts = JsonConvert.DeserializeObject<Gift[]>(json);
-
-            if (gifts != null)
+            try
             {
-                for (int i = 0; i < gifts.Length; i++)
-                {
-                    if (gifts[i] != null)
-                    {
-                        if (GeneralDataHolder.Gifts != null)
-                        {
-                            GiftController.AddGift(gifts[i]);
-                        }
+                string json = File.ReadAllText(path);
 
+
+                Carton[]? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
+
+                if (cartons != null)
+                {
+                    for (int i = 0; i < cartons.Length; i++)
+                    {
+                        if (cartons[i] != null)
+                        {
+                            if (GeneralDataHolder.Cartons.Table != null)
+                            {
+                                CartonController.AddCarton(cartons[i]);
+                            }
+
+                        }
                     }
                 }
+
+            }
+            catch
+            {
+                LogEventController.AddLogEvent("Json Load error");
             }
 
-            return gifts!;
         }
 
-        public static Carton[] LoadCartFromJson(string path)
+        public static void LoadGiftsFromJson(string path)
         {
-
-            string json = File.ReadAllText(path);
-
-
-            Carton[]? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
-
-            if (cartons != null)
+            try
             {
-                for (int i = 0; i < cartons.Length; i++)
+                string json = File.ReadAllText(path);
+                Gift[]? gifts = JsonConvert.DeserializeObject<Gift[]>(json);
+
+                if (gifts != null)
                 {
-                    if (cartons[i] != null)
+                    for (int i = 0; i < gifts.Length; i++)
                     {
-                        if (GeneralDataHolder.CartList.Items != null)
+                        if (gifts[i] != null)
                         {
-                            ShoppingCartController.AddToCart(cartons[i]);
+                            if (GeneralDataHolder.Gifts != null)
+                            {
+                                GiftController.AddGift(gifts[i]);
+                            }
+
                         }
                     }
                 }
             }
-
-            return cartons!;
+            catch 
+            {
+                LogEventController.AddLogEvent("Json Load error");
+            }
         }
 
-        public static Purchase[] LoadPurchaseFromJson(string path)
+        public static void LoadCartFromJson(string path)
         {
-            string json = File.ReadAllText(path);
-
-            Purchase[]? purchases = JsonConvert.DeserializeObject<Purchase[]>(json);
-            GeneralDataHolder.Purchase.Clear();
-
-            if (purchases != null)
+            try
             {
-                for (int i = 0; i < purchases.Length; i++)
-                {
-                    if (purchases[i] != null)
-                    {
-                        if (GeneralDataHolder.Purchase.Items != null)
-                        {
-                            PurchaseController.AddPurchase(purchases[i]);
-                        }
+                string json = File.ReadAllText(path);
+                Carton[]? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
 
+                if (cartons != null)
+                {
+                    for (int i = 0; i < cartons.Length; i++)
+                    {
+                        if (cartons[i] != null)
+                        {
+                            if (GeneralDataHolder.CartList.Items != null)
+                            {
+                                ShoppingCartController.AddToCart(cartons[i]);
+                            }
+                        }
                     }
                 }
             }
-
-            return purchases!;
+            catch 
+            {
+                LogEventController.AddLogEvent("Json Load error");
+            }
 
         }
 
+        public static void LoadPurchaseFromJson(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
 
+                Purchase[]? purchases = JsonConvert.DeserializeObject<Purchase[]>(json);
+                GeneralDataHolder.Purchase.Clear();
+
+                if (purchases != null)
+                {
+                    for (int i = 0; i < purchases.Length; i++)
+                    {
+                        if (purchases[i] != null)
+                        {
+                            if (GeneralDataHolder.Purchase.Items != null)
+                            {
+                                PurchaseController.AddPurchase(purchases[i]);
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                LogEventController.AddLogEvent("Json Load error");
+            }
+
+        }
+
+        public static void LoadBestSellerFromJson(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                BestSeller[]? bestSellers = JsonConvert.DeserializeObject<BestSeller[]>(json);
+                GeneralDataHolder.BestSellers.Clear();
+
+                if (bestSellers != null)
+                {
+                    foreach (var item in bestSellers)
+                    {
+                        if (item != null)
+                        {
+                            GeneralDataHolder.BestSellers.Add(item);
+                        }
+                    }
+                }
+            }
+            catch 
+            {
+                LogEventController.AddLogEvent("Json Load error");
+            }
+
+        }
     }
 }
     

@@ -26,7 +26,7 @@ namespace CardboardWarehouse_DS
         private int _size;
         private Node[] _buckets;
 
-        public DoubleHash(int size = 4)
+        public DoubleHash(int size)
         {
             _size = size;
             _buckets = new Node[size];

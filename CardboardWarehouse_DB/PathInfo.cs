@@ -15,6 +15,7 @@ namespace CardboardWarehouse_DB
         public static string SoppingCartPath { get => "C:\\Users\\97250\\Desktop\\הנדסת תוכנה\\C#\\C# תרגולים\\CardboardWarehouse_UI\\CardboardWarehouse_DB\\JsonData\\ShoppingCart.json"; }
         public static string PurchasePath { get => "C:\\Users\\97250\\Desktop\\הנדסת תוכנה\\C#\\C# תרגולים\\CardboardWarehouse_UI\\CardboardWarehouse_DB\\JsonData\\Purchase.json"; } 
        
+        public static string BestSellerPath { get => "C:\\Users\\97250\\Desktop\\הנדסת תוכנה\\C#\\C# תרגולים\\CardboardWarehouse_UI\\CardboardWarehouse_DB\\JsonData\\BestSellers.json"; }
 
     }
 }

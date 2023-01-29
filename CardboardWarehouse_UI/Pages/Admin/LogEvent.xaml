@@ -9,6 +9,13 @@
       Title="LogEvent">
 
     <Grid>
-        <Label HorizontalAlignment="Center"  FontSize="30" Content="Log Event"/>
+        <DataGrid x:Name="systemEventGrid" Margin="193,110,274,79"  IsReadOnly="True" RowHeaderWidth="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Event Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Date Profit" Binding="{Binding Data}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Best sellers" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy1" HorizontalAlignment="Left" Margin="275,60,0,0" VerticalAlignment="Top" Width="166"/>
+        <Button Content="Clear Log Event" Name="BtnClearLogEvent" Background="Red" HorizontalAlignment="Left" Margin="471,75,0,0" VerticalAlignment="Top" Width="102" Click="BtnClearLogEvent_Click"/>
     </Grid>
 </Page>

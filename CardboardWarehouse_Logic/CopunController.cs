@@ -18,6 +18,7 @@ namespace CardboardWarehouse_Logic
                 if (!GeneralDataHolder.Copuns.Contain(copun))
                 {
                     GeneralDataHolder.Copuns.Add(copun);
+                    LogEventController.AddLogEvent($"The copun {copun} are added");
                 }
             }
         }
@@ -27,6 +28,7 @@ namespace CardboardWarehouse_Logic
             if (NotNull(copun))
             {
                 GeneralDataHolder.Copuns.Remove(copun);
+                LogEventController.AddLogEvent($"The copun {copun} are deleted");
             }
         }
 

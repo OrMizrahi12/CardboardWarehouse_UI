@@ -10,9 +10,8 @@
 
     <Grid>
         <Grid>
-            <DataGrid x:Name="purchaseGrid" Margin="104,127,460,62"  IsReadOnly="True" RowHeaderWidth="0" >
+            <DataGrid x:Name="purchaseGrid" Margin="10,110,660,79"  IsReadOnly="True" RowHeaderWidth="0" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="ItemCount" Binding="{Binding ItemCount}"/>
                     <DataGridTextColumn Header="TotalPrice" Binding="{Binding TotalPrice}"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
@@ -26,14 +25,25 @@
                     <DataGridTextColumn Header="Precent" Binding="{Binding Precent}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Total Profit" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit" HorizontalAlignment="Left" Margin="146,72,0,0" VerticalAlignment="Top"/>
-            <Label Content="Add copun" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy" HorizontalAlignment="Left" Margin="597,72,0,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="bestSellerGrid" Margin="292,110,387,79"  IsReadOnly="True" RowHeaderWidth="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Carton" Binding="{Binding Carton}" />
+                    <DataGridTextColumn Header="Total Profit" Binding="{Binding TotalProfit}"/>
+                    <DataGridTextColumn Header="Sales" Binding="{Binding Sales}" SortDirection="Ascending"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Label Content="Total Profit" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top"/>
+            <Label Content="Add copun" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy" HorizontalAlignment="Left" Margin="589,55,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="TxtCopunName" HorizontalAlignment="Left" Margin="573,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="83"/>
             <TextBox x:Name="TxtCopunPrecent" HorizontalAlignment="Left" Margin="671,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82"/>
             <Button x:Name="BtnAddCopun" Background="DarkGreen" Content="Add copun" HorizontalAlignment="Left" Margin="604,169,0,0" VerticalAlignment="Top" Width="120" Click="BtnAddCopun_Click"/>
             <Label Content="Copun Name" HorizontalAlignment="Left" Margin="574,115,0,0" VerticalAlignment="Top"/>
             <Label Content="Precent" HorizontalAlignment="Left" Margin="687,115,0,0" VerticalAlignment="Top"/>
             <Button Background="DarkRed" x:Name="BtnDeleeteCopun" Content="Delete Copun" HorizontalAlignment="Left" Margin="632,323,0,0" VerticalAlignment="Top" Click="BtnDeleeteCopun_Click"/>
+            <Label Content="Best sellers" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy1" HorizontalAlignment="Left" Margin="275,60,0,0" VerticalAlignment="Top"/>
+            <Button Name="BtnReStock" Background="DarkOrange" Content="Re stock" HorizontalAlignment="Left" Margin="292,390,0,0" VerticalAlignment="Top" Width="121" Click="BtnReStock_Click"/>
+            <Label Content="Label" HorizontalAlignment="Left" Margin="322,90,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Page>

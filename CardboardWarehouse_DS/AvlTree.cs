@@ -1,314 +1,540 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CardboardWarehouse_DS
 {
 
-    //public class AvlTree
-    //{
+
+    public class AVLNode<TKey, TValue>
+    {
+        public AVLNode(TKey key, TValue value)
+        {
+            this.Key = key;
+            this.Value = value;
+            this.LeftChild = null!;
+            this.RightChild = null!;
+            this.Parent = null!;
+            this.Balance = 0;
+        }
+
+        public AVLNode(TKey key, TValue value, AVLNode<TKey, TValue> parent)
+            : this(key, value)
+        {
+            this.Parent = parent;
+        }
+
+        public AVLNode(AVLNode<TKey, TValue> node)
+            : this(node.Key, node.Value, node.Parent)
+        {
+            this.LeftChild = node.LeftChild;
+            this.RightChild = node.RightChild;
+        }
+
+        public TKey Key { get; set; }
+        public TValue Value { get; set; }
+        public AVLNode<TKey, TValue> Parent { get; set; }
+        public AVLNode<TKey, TValue> LeftChild { get; set; }
+        public AVLNode<TKey, TValue> RightChild { get; set; }
+        public int Balance { get; set; }
 
 
+        public override int GetHashCode()
+        {
+            return (this.Key.GetHashCode() << 16) | (this.Value.GetHashCode() & 0xFFFF);
+        }
 
-    //    Carton? root = GeneralTreeInstance.GeneralRoot;
-    //    public AvlTree()
-    //    {
+        //Two nodes are equal if their both keys and values match.
+        public override bool Equals(object obj)
+        {
+            AVLNode<TKey, TValue> node = obj as AVLNode<TKey, TValue>;
+            if (node == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (this.Key.Equals(node.Key) && this.Value.Equals(node.Value))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
-    //    }
-    //    public Carton? Root { get { return root; } set { } }
+        public override string ToString()
+        {
+            return String.Format("({0} {1})", this.Key, this.Value);
+        }
+    }
+    public class AVLTree<TKey, TValue> : IEnumerable<AVLNode<TKey, TValue>> where TKey : IComparable<TKey>
+    {
+        private AVLNode<TKey, TValue> root;
 
+        public AVLTree()
+        {
+            this.root = null;
+        }
+        public void Insert(TKey key, TValue value)
+        {
+            if (this.root == null)
+            {
+                this.root = new AVLNode<TKey, TValue>(key, value);
+            }
+            else
+            {
+                AVLNode<TKey, TValue> currentNode = root;
+                while (currentNode != null)
+                {
+                    if (currentNode.Key.CompareTo(key) == -1)
+                    {
+                        if (currentNode.RightChild == null)
+                        {
+                            currentNode.RightChild = new AVLNode<TKey, TValue>(key, value, currentNode);
+     
+                            InsertBalanceTree(currentNode, -1);
+                            break;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.RightChild;
+                        }
+                    }
+                    else if (currentNode.Key.CompareTo(key) == 1)
+                    {
+                        if (currentNode.LeftChild == null)
+                        {
+                            currentNode.LeftChild = new AVLNode<TKey, TValue>(key, value, currentNode);
+                            InsertBalanceTree(currentNode, 1);
+                            break;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.LeftChild;
+                        }
+                    }
+                    else
+                    {
+                        currentNode.Value = value;
+                        break;
+                    }
+                }
+            }
+        }
+        private void InsertBalanceTree(AVLNode<TKey, TValue> node, int addBalance)
+        {
+            while (node != null)
+            {
+                node.Balance += addBalance;
 
+                if (node.Balance == 0)
+                {
+                    break;
+                }
+                else if (node.Balance == 2)
+                {
+                    if (node.LeftChild.Balance == 1)
+                    {
+                        RotateLeftLeft(node);
+                    }
+                    else
+                    {
+                        RotateLeftRight(node);
+                    }
+                    break;
+                }
+                else if (node.Balance == -2)
+                {
+                    if (node.RightChild.Balance == -1)
+                    {
+                        RotateRightRight(node);
+                    }
+                    else
+                    {
+                        RotateRightLeft(node);
+                    }
+                    break;
+                }
 
-    //    public void Add(Carton newCarton)
-    //    {
+                if (node.Parent != null)
+                {
 
-    //        if (root == null)
-    //        {
-    //            root = newCarton;
-    //        }
-    //        else
-    //        {
-    //            root = RecursiveInsert(root, newCarton);
-    //        }
-    //    }
-    //    private Carton RecursiveInsert(Carton current, Carton n)
-    //    {
-    //        if (current == null)
-    //        {
-    //            current = n;
-    //            return current;
-    //        }
+                    if (node.Parent.LeftChild == node)
+                    {
+                        addBalance = 1;
+                    }
+                    else
+                    {
+                        addBalance = -1;
+                    }
+                }
+                node = node.Parent!;
+            }
+        }
 
-    //        else if (current.CompareTo(n) == 1)
-    //        {
-    //            current.Left = RecursiveInsert(current.Left, n);
-    //            current = balance_tree(current);
-    //        }
-    //        else if (current.CompareTo(n) == -1)
-    //        {
-    //            current.Right = RecursiveInsert(current.Right, n);
-    //            current = balance_tree(current);
-    //        }
-    //        return current;
-    //    }
-    //    private Carton balance_tree(Carton current)
-    //    {
-    //        int b_factor = balance_factor(current);
-    //        if (b_factor > 1)
-    //        {
-    //            if (balance_factor(current.Left) > 0)
-    //            {
-    //                current = RotateLL(current);
-    //            }
-    //            else
-    //            {
-    //                current = RotateLR(current);
-    //            }
-    //        }
-    //        else if (b_factor < -1)
-    //        {
-    //            if (balance_factor(current.Right) > 0)
-    //            {
-    //                current = RotateRL(current);
-    //            }
-    //            else
-    //            {
-    //                current = RotateRR(current);
-    //            }
-    //        }
-    //        return current;
-    //    }
-    //    public void Delete(Carton target)
-    //    {//and here
-    //        root = Delete(root, target);
-    //    }
-    //    private Carton Delete(Carton current, Carton target)
-    //    {
-    //        Carton parent;
-    //        if (current == null)
-    //        {
-    //            return null;
-    //        }
-    //        else
-    //        {
-    //            //left subtree
-    //            if (current.CompareTo(target) == 1)
-    //            {
-    //                current.Left = Delete(current.Left, target);
-    //                if (balance_factor(current) == -2)//here
-    //                {
-    //                    if (balance_factor(current.Right) <= 0)
-    //                    {
-    //                        current = RotateRR(current);
-    //                    }
-    //                    else
-    //                    {
-    //                        current = RotateRL(current);
-    //                    }
-    //                }
-    //            }
-    //            //right subtree
-    //            else if (current.CompareTo(target) == -1)
-    //            {
-    //                current.Right = Delete(current.Right, target);
-    //                if (balance_factor(current) == 2)
-    //                {
-    //                    if (balance_factor(current.Left) >= 0)
-    //                    {
-    //                        current = RotateLL(current);
-    //                    }
-    //                    else
-    //                    {
-    //                        current = RotateLR(current);
-    //                    }
-    //                }
-    //            }
-    //            //if target is found
-    //            else
-    //            {
-    //                if (current.Right != null)
-    //                {
-    //                    //delete its inorder successor
-    //                    parent = current.Right;
-    //                    while (parent.Left != null)
-    //                    {
-    //                        parent = parent.Left;
-    //                    }
-    //                    current = parent;
-    //                    current.Right = Delete(current.Right, parent);
-    //                    if (balance_factor(current) == 2)//rebalancing
-    //                    {
-    //                        if (balance_factor(current.Left) >= 0)
-    //                        {
-    //                            current = RotateLL(current);
-    //                        }
-    //                        else { current = RotateLR(current); }
-    //                    }
-    //                }
-    //                else
-    //                {   //if current.left != null
-    //                    return current.Left;
-    //                }
-    //            }
-    //        }
-    //        return current;
-    //    }
+        private void RotateRightRight(AVLNode<TKey, TValue> node)
+        {
+            AVLNode<TKey, TValue> rightChild = node.RightChild;
+            AVLNode<TKey, TValue> rightLeftChild = null;
+            AVLNode<TKey, TValue> parent = node.Parent;
 
+            if (rightChild != null)
+            {
+                rightLeftChild = rightChild.LeftChild;
+                rightChild.Parent = parent;
+                rightChild.LeftChild = node;
+                rightChild.Balance++;
+                node.Balance = -rightChild.Balance;
+            }
 
-    //    public Carton Find(Carton key)
-    //    {
-    //        return Find(root, key);
-    //    }
+            node.RightChild = rightLeftChild;
+            node.Parent = rightChild;
 
-    //    private Carton Find(Carton travel, Carton target)
-    //    {
-    //        if (travel == null)
-    //        {
-    //            return default!;
-    //        }
-    //        else if (CheckRremainder(travel, target))
-    //        {
-    //            return travel;
-    //        }
+            if (rightLeftChild != null)
+            {
+                rightLeftChild.Parent = node;
+            }
+            if (node == this.root)
+            {
+                this.root = rightChild;
+            }
+            else if (parent.RightChild == node)
+            {
+                parent.RightChild = rightChild;
+            }
+            else
+            {
+                parent.LeftChild = rightChild;
+            }
+        }
 
-    //        Carton left = Find(travel.Left, target);
+        private void RotateLeftLeft(AVLNode<TKey, TValue> node)
+        {
+            AVLNode<TKey, TValue> leftChild = node.LeftChild;
+            AVLNode<TKey, TValue> leftRightChild = null;
+            AVLNode<TKey, TValue> parent = node.Parent;
 
-    //        if (left != null)
-    //        {
-    //            return left;
-    //        }
-    //        else
-    //        {
-    //            return Find(travel.Right, target); ;
-    //        }
-    //    }
+            if (leftChild != null)
+            {
+                leftRightChild = leftChild.RightChild;
+                leftChild.Parent = parent;
+                leftChild.RightChild = node;
+                leftChild.Balance--;
+                node.Balance = -leftChild.Balance;
+            }
 
-    //    public Carton Get(Carton key)
-    //    {
-    //        return Get(root, key);
-    //    }
+            node.Parent = leftChild;
+            node.LeftChild = leftRightChild;
 
-    //    private Carton Get(Carton root, Carton key)
-    //    {
-    //        if (root == null)
-    //        {
-    //            return default!;
-    //        }
-    //        else
-    //        {
-    //            if (root.CompareTo(key) == 1)
-    //            {
-    //                return Get(root.Left, key);
-    //            }
-    //            else if (root.CompareTo(key) == -1)
-    //            {
-    //                return Get(root.Right, key);
-    //            }
-    //            else
-    //            {
-    //                return root;
-    //            }
-    //        }
-    //    }
+            if (leftRightChild != null)
+            {
+                leftRightChild.Parent = node;
+            }
 
+            if (node == this.root)
+            {
+                this.root = leftChild;
+            }
+            else if (parent.LeftChild == node)
+            {
+                parent.LeftChild = leftChild;
+            }
+            else
+            {
+                parent.RightChild = leftChild;
+            }
 
+        }
 
-    //    public void UpdateStocK(bool increment, Carton carton)
-    //    {
-    //        carton = Get(carton);
+        private void RotateRightLeft(AVLNode<TKey, TValue> node)
+        {
+            AVLNode<TKey, TValue> rightChild = node.RightChild;
+            AVLNode<TKey, TValue> rightLeftChild = null;
+            AVLNode<TKey, TValue> rightLeftRightChild = null;
 
-    //        if (increment)
-    //        {
-    //            carton.Count++;
-    //        }
-    //        else
-    //        {
-    //            if (carton.Count > 1)
-    //            {
-    //                carton.Count--;
-    //            }
-    //            else if (carton.Count == 1)
-    //            {
-    //                Delete(carton);
-    //            }
+            if (rightChild != null)
+            {
+                rightLeftChild = rightChild.LeftChild;
+            }
+            if (rightLeftChild != null)
+            {
+                rightLeftRightChild = rightLeftChild.RightChild;
+            }
 
-    //        }
-    //    }
+            node.RightChild = rightLeftChild;
 
-    //    public bool CheckRremainder(Carton travel, Carton target)
-    //    {
-    //        return (travel.X - target.X > 0 && travel.X - target.X <= 10) && (travel.Y - target.Y > 0 && travel.Y - target.Y <= 10);
-    //    }
+            if (rightLeftChild != null)
+            {
+                rightLeftChild.Parent = node;
+                rightLeftChild.RightChild = rightChild;
+                rightLeftChild.Balance--;
+            }
 
-    //    public void DisplayTree()
-    //    {
-    //        if (root == null)
-    //        {
-    //            Console.WriteLine("Tree is empty");
-    //            return;
-    //        }
-    //        InOrderDisplayTree(root);
-    //        Console.WriteLine();
-    //    }
-    //    private void InOrderDisplayTree(Carton current)
-    //    {
-    //        if (current != null)
-    //        {
-    //            InOrderDisplayTree(current.Left);
-    //            Console.Write(current + " ");
-    //            InOrderDisplayTree(current.Right);
-    //        }
-    //    }
-    //    private int max(int l, int r)
-    //    {
-    //        return l > r ? l : r;
-    //    }
-    //    private int getHeight(Carton current)
-    //    {
-    //        int height = 0;
-    //        if (current != null)
-    //        {
-    //            int l = getHeight(current.Left);
-    //            int r = getHeight(current.Right);
-    //            int m = max(l, r);
-    //            height = m + 1;
-    //        }
-    //        return height;
-    //    }
-    //    private int balance_factor(Carton current)
-    //    {
-    //        int l = getHeight(current.Left);
-    //        int r = getHeight(current.Right);
-    //        int b_factor = l - r;
-    //        return b_factor;
-    //    }
-    //    private Carton RotateRR(Carton parent)
-    //    {
-    //        Carton pivot = parent.Right;
-    //        parent.Right = pivot.Left;
-    //        pivot.Left = parent;
-    //        return pivot;
-    //    }
-    //    private Carton RotateLL(Carton parent)
-    //    {
-    //        Carton pivot = parent.Left;
-    //        parent.Left = pivot.Right;
-    //        pivot.Right = parent;
-    //        return pivot;
-    //    }
-    //    private Carton RotateLR(Carton parent)
-    //    {
-    //        Carton pivot = parent.Left;
-    //        parent.Left = RotateRR(pivot);
-    //        return RotateLL(parent);
-    //    }
-    //    private Carton RotateRL(Carton parent)
-    //    {
-    //        Carton pivot = parent.Right;
-    //        parent.Right = RotateLL(pivot);
-    //        return RotateRR(parent);
-    //    }
-    //}
+            if (rightChild != null)
+            {
+                rightChild.Parent = rightLeftChild;
+                rightChild.LeftChild = rightLeftRightChild;
+                rightChild.Balance--;
+            }
+
+            if (rightLeftRightChild != null)
+            {
+                rightLeftRightChild.Parent = rightChild;
+            }
+
+            RotateRightRight(node);
+        }
+
+        private void RotateLeftRight(AVLNode<TKey, TValue> node)
+        {
+            AVLNode<TKey, TValue> leftChild = node.LeftChild;
+            AVLNode<TKey, TValue> leftRightChild = leftChild.RightChild;
+            AVLNode<TKey, TValue> leftRightLeftChild = null;
+            if (leftRightChild != null)
+            {
+                leftRightLeftChild = leftRightChild.LeftChild;
+            }
+
+            node.LeftChild = leftRightChild;
+
+            if (leftRightChild != null)
+            {
+                leftRightChild.Parent = node;
+                leftRightChild.LeftChild = leftChild;
+                leftRightChild.Balance++;
+            }
+
+            if (leftChild != null)
+            {
+                leftChild.Parent = leftRightChild;
+                leftChild.RightChild = leftRightLeftChild;
+                leftChild.Balance++;
+            }
+
+            if (leftRightLeftChild != null)
+            {
+                leftRightLeftChild.Parent = leftChild;
+            }
+
+            RotateLeftLeft(node);
+        }
+
+        public void Delete(TKey key)
+        {
+            AVLNode<TKey, TValue> current = this.root;
+            while (current != null)
+            {
+                if (current.Key.CompareTo(key) == -1)
+                {
+                    current = current.RightChild;
+                }
+                else if (current.Key.CompareTo(key) == 1)
+                {
+                    current = current.LeftChild;
+                }
+                else //Found the key.
+                {
+                    if (current.LeftChild == null && current.RightChild == null)
+                    {
+                        if (current == root)
+                        {
+                            root = null;
+                        }
+                        else if (current.Parent.RightChild == current)
+                        {
+                            current.Parent.RightChild = null;
+                            DeleteBalanceTree(current.Parent, 1);
+                        }
+                        else
+                        {
+                            current.Parent.LeftChild = null;
+                            DeleteBalanceTree(current.Parent, -1);
+                        }
+                    }
+                    else if (current.LeftChild != null) //Get the biggest node from the left subtree.
+                    {
+                        AVLNode<TKey, TValue> rightMost = current.LeftChild;
+                        while (rightMost.RightChild != null)
+                        {
+                            rightMost = rightMost.RightChild;
+                        }
+
+                        ReplaceNodes(current, rightMost);
+                        DeleteBalanceTree(rightMost.Parent, 1);
+                    }
+                    else //Get the smallest node from the right subtree.
+                    {
+                        AVLNode<TKey, TValue> leftMost = current.RightChild;
+                        while (leftMost.LeftChild != null)
+                        {
+                            leftMost = leftMost.LeftChild;
+                        }
+
+                        ReplaceNodes(current, leftMost);
+                        DeleteBalanceTree(leftMost.Parent, -1);
+                    }
+                    break;
+                }
+            }
+        }
+
+        private void ReplaceNodes(AVLNode<TKey, TValue> sourceNode, AVLNode<TKey, TValue> subtreeNode)
+        {
+            sourceNode.Key = subtreeNode.Key;
+            sourceNode.Value = subtreeNode.Value;
+
+            if (subtreeNode.Parent != null)
+            {
+                if (subtreeNode.LeftChild != null)
+                {
+                    subtreeNode.LeftChild.Parent = subtreeNode.Parent;
+                    if (subtreeNode.Parent.LeftChild == subtreeNode)
+                    {
+                        subtreeNode.Parent.LeftChild = subtreeNode.LeftChild;
+                    }
+                    else
+                    {
+                        subtreeNode.Parent.RightChild = subtreeNode.LeftChild;
+                    }
+                }
+                else if (subtreeNode.RightChild != null)
+                {
+                    subtreeNode.RightChild.Parent = subtreeNode.Parent;
+                    if (subtreeNode.Parent.LeftChild == subtreeNode)
+                    {
+                        subtreeNode.Parent.LeftChild = subtreeNode.RightChild;
+                    }
+                    else
+                    {
+                        subtreeNode.Parent.RightChild = subtreeNode.RightChild;
+                    }
+                }
+                else
+                {
+                    if (subtreeNode.Parent.LeftChild == subtreeNode)
+                    {
+                        subtreeNode.Parent.LeftChild = null;
+                    }
+                    else
+                    {
+                        subtreeNode.Parent.RightChild = null;
+                    }
+                }
+            }
+        }
+        private void DeleteBalanceTree(AVLNode<TKey, TValue> node, int addBalance)
+        {
+            while (node != null)
+            {
+                node.Balance += addBalance;
+                addBalance = node.Balance;
+
+                if (node.Balance == 2)
+                {
+                    if (node.LeftChild != null && node.LeftChild.Balance >= 0)
+                    {
+                        RotateLeftLeft(node);
+
+                        if (node.Balance == -1)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        RotateLeftRight(node);
+                    }
+                }
+                else if (node.Balance == -2)
+                {
+                    if (node.RightChild != null && node.RightChild.Balance <= 0)
+                    {
+                        RotateRightRight(node);
+
+                        if (node.Balance == 1)
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        RotateRightLeft(node);
+                    }
+                }
+                else if (node.Balance != 0)
+                {
+                    return;
+                }
+
+                AVLNode<TKey, TValue> parent = node.Parent;
+
+                if (parent != null)
+                {
+                    if (parent.LeftChild == node)
+                    {
+                        addBalance = -1;
+                    }
+                    else
+                    {
+                        addBalance = 1;
+                    }
+                }
+                node = parent;
+            }
+        }
+        public bool TryGetValue(TKey key, out TValue result)
+        {
+            AVLNode<TKey, TValue> current = root;
+            while (current != null)
+            {
+                if (current.Key.CompareTo(key) == -1)
+                {
+                    current = current.RightChild;
+                }
+                else if (current.Key.CompareTo(key) == 1)
+                {
+                    current = current.LeftChild;
+                }
+                else
+                {
+                    result = current.Value;
+                    return true;
+                }
+            }
+            result = default(TValue);
+            return false;
+        }
+
+        public IEnumerator<AVLNode<TKey, TValue>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Print()
+        {
+            Print(root);
+        }
+        public void Print(AVLNode<TKey, TValue> root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+            Print(root.LeftChild);
+            Console.WriteLine(root.Value);
+            Print(root.RightChild);
+        }
+    }
 }

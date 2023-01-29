@@ -24,6 +24,8 @@ namespace CardboardWarehouse_DS
             _size =size;
             _table = new T[size];
         }
+
+        // O(1)
         public int GetIndex(T item)
         {
             string key = item?.ToString()!;
@@ -42,6 +44,8 @@ namespace CardboardWarehouse_DS
             return Math.Abs(index % _size);
         }
 
+
+        // O(1)
         public void Add(T item)
         {
             if (HashNotFull())
@@ -62,20 +66,6 @@ namespace CardboardWarehouse_DS
             }
         }
 
-        private void FindOtherLocation(T? item)
-        {
-            for (int i = 0; i < _size; i++)
-            {
-                if (_table[i] == null)
-                {
-                    _table[i] = item!;
-                    _itensCount++;
-                   break;
-                }
-                break;
-            }
-        }
-
         public void Resize(int newSize)
         {
             if (!HashNotFull())
@@ -87,6 +77,7 @@ namespace CardboardWarehouse_DS
             }
         }
 
+        // O(1)
         public T Get(T element)
         {
             int index = GetIndex(element);
@@ -101,6 +92,7 @@ namespace CardboardWarehouse_DS
             }
         }
 
+        // O(1)
         public T Remove(T item)
         {
             int index = GetIndex(item);
@@ -118,21 +110,14 @@ namespace CardboardWarehouse_DS
             }
 
         }
-        public void PrintAll()
-        {
-            for (int i = 0; i < _table.Length; i++)
-            {
-                if (_table[i] != null)
-                {
-                    _table[i]?.ToString(); 
-                }
-            }
-        }
-
+     
+        // O(1)
         public bool HashNotFull()
         {
             return _itensCount < _size - 1;
         }
+
+        // O(n)
         public void LoadDataToGrid(DataGrid dataGrid)
         {
             for (int i = 0; i < _size; i++)

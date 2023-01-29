@@ -33,6 +33,7 @@ namespace CardboardWarehouse_Logic
             {
                 GeneralDataHolder.Cartons.Add(carton);
                 JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
+                LogEventController.AddLogEvent($"{carton} are added");
             }
         }
 
@@ -48,17 +49,9 @@ namespace CardboardWarehouse_Logic
                 }
                 
                 JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
+                LogEventController.AddLogEvent($"{removedCarton} are removed");
             }
 
-        }
-        private static void DeleteUnderCollision(int index, Carton carton)
-        {
-            Carton ? removedCarton = GeneralDataHolder.Cartons?.Table?[index]?.CollisionList?.Remove(carton);
-          
-            if (IfNotNull(removedCarton!))
-            {
-                AddToRecyclingBasket(removedCarton!);
-            }
         }
 
         public static Carton GetCarton(Carton carton)
@@ -172,7 +165,7 @@ namespace CardboardWarehouse_Logic
                 GeneralDataHolder.CartonUndoStack.Push(carton);
             }
         }
-        // this is adding the carton back to the stock
+
         public static void CartonUndoActions()
         {
             if(GeneralDataHolder.CartonUndoStack.Size() > 0)
@@ -212,6 +205,20 @@ namespace CardboardWarehouse_Logic
             {
                 GeneralDataHolder.CartonRedoStack.Push(carton);
             }
+        }
+
+        static public void ReStock()
+        {
+            foreach (var item in GeneralDataHolder.BestSellers.Items)
+            {
+                Carton current = GetCarton(item.Carton);
+
+                if (NotNull(current))
+                {
+                    current.Count += item.Sales;
+                }
+            }
+            JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
         }
     }
 }

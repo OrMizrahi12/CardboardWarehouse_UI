@@ -12,7 +12,6 @@ namespace CardboardWarehouse_DB
     {
         public static GenericHash<Carton> Cartons = new GenericHash<Carton>(100);
 
-
         public static GenericHash<Gift> Gifts = new GenericHash<Gift>(100);
 
         public static CustomList<Carton> CartList = new CustomList<Carton>();
@@ -24,6 +23,11 @@ namespace CardboardWarehouse_DB
         public static GenericStack<Carton> CartonRedoStack = new GenericStack<Carton>();
 
         public static CustomList<Copun> Copuns = new CustomList<Copun>();
+
+        public static CustomList<BestSeller> BestSellers = new CustomList<BestSeller>();
+
+        public static CustomList<SystemEvent> SystemEvents = new CustomList<SystemEvent>();
+        
         public GeneralDataHolder() { }
     }
 }

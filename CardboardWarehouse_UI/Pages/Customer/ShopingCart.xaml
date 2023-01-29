@@ -23,6 +23,7 @@
         <TextBox x:Name="TxtAddCopun" HorizontalAlignment="Left" Margin="108,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="BtnAddCodeCopun" Background="DarkGreen" Content="Add Code" HorizontalAlignment="Left" Margin="111,200,0,0" VerticalAlignment="Top" Width="117" Click="BtnAddCodeCopun_Click"/>
         <Label x:Name="TxtSuccess" Content="" HorizontalAlignment="Left" Margin="117,234,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtPay" HorizontalAlignment="Left" Margin="680,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82"/>
 
     </Grid>
 </Page>
