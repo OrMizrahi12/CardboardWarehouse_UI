@@ -23,10 +23,12 @@ namespace CardboardWarehouse_Logic
         {
             JsonLogic.LoadCartFromJson(path);
         }
+
         public static void LoadGiftsFromJson(string path)
         {
             JsonLogic.LoadGiftsFromJson(path);
         }
+
         public static void LoadPurchaseFromJson()
         {
             JsonLogic.LoadPurchaseFromJson(PathInfo.PurchasePath);

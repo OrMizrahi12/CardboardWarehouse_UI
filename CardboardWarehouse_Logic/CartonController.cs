@@ -26,7 +26,6 @@ namespace CardboardWarehouse_Logic
             JsonDataInformer.LoadDataFromJson(PathInfo.CartonJsonPath);
         }
 
-
         public static void AddCarton(Carton carton)
         {
             if (NotNull(carton))
@@ -51,7 +50,6 @@ namespace CardboardWarehouse_Logic
                 JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
                 LogEventController.AddLogEvent($"{removedCarton} are removed");
             }
-
         }
 
         public static Carton GetCarton(Carton carton)
@@ -84,7 +82,6 @@ namespace CardboardWarehouse_Logic
                 GeneralDataHolder.Cartons.Get(carton).Count--;
             }
             JsonLogic.UpdateJsonData(PathInfo.CartonJsonPath);
-
         }
 
         public static void UpdateCartonLastAction(Carton carton)
@@ -96,12 +93,12 @@ namespace CardboardWarehouse_Logic
         {
             return carton != null;
         }
+
         public static Carton GetClosestCarton(int x, int y)
         {
             Carton closestCarton = new(short.MaxValue, short.MaxValue, 0, DateTime.Now,0);
             for (int i = 0; i < GeneralDataHolder.Cartons.Table.Length; i++)
-               {
-                
+            {    
                 if (GeneralDataHolder.Cartons.Table[i] != null)
                 {
                     if (CheacCartonRange(GeneralDataHolder.Cartons.Table[i], x, y))

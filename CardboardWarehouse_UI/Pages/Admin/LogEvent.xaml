@@ -9,13 +9,25 @@
       Title="LogEvent">
 
     <Grid>
-        <DataGrid x:Name="systemEventGrid" Margin="193,110,274,79"  IsReadOnly="True" RowHeaderWidth="0">
+        <DataGrid x:Name="systemEventGrid" Margin="34,111,617,78"  IsReadOnly="True" RowHeaderWidth="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Event Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Date Profit" Binding="{Binding Data}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Best sellers" Foreground="DarkGreen" FontSize="30" x:Name="TxtTotalProfit_Copy1" HorizontalAlignment="Left" Margin="275,60,0,0" VerticalAlignment="Top" Width="166"/>
-        <Button Content="Clear Log Event" Name="BtnClearLogEvent" Background="Red" HorizontalAlignment="Left" Margin="471,75,0,0" VerticalAlignment="Top" Width="102" Click="BtnClearLogEvent_Click"/>
+        <Button Content="Clear Log Event" Name="BtnClearLogEvent" Background="Red" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" Width="102" Click="BtnClearLogEvent_Click"/>
+
+
+        <DataGrid x:Name="custReqGrid" Margin="449,111,117,78"  IsReadOnly="True" RowHeaderWidth="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="X" Binding="{Binding X}"/>
+                <DataGridTextColumn Header="Y" Binding="{Binding Y}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BtnLoadCustReq" Background="DarkGoldenrod" Content="Load request" HorizontalAlignment="Left" Margin="449,86,0,0" VerticalAlignment="Top" Click="BtnLoadCustReq_Click"/>
+
+
     </Grid>
+
+
 </Page>

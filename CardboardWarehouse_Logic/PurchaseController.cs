@@ -17,7 +17,6 @@ namespace CardboardWarehouse_Logic
             JsonDataInformer.LoadPurchaseFromJson();
             JsonLogic.UpdateJsonData(PathInfo.PurchasePath);
             LoadPurchaseGrid(grid);
-
         }
 
 

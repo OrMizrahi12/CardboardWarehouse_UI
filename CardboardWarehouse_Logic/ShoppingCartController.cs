@@ -17,8 +17,8 @@ namespace CardboardWarehouse_Logic
         private static float _totalPrice; 
         public static int ItemsCount { get { return GeneralDataHolder.CartList.Count;} }
         public static float TotalPrice { get { return _totalPrice; } }
-
         public static float Discount { get; private set; }
+
         public static void LoadDataToGrid(DataGrid grid)
         {
             LoadDataHelper(grid);

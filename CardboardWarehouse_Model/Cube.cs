@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_Model
 {
-    public abstract class Cube
+    public class Cube 
     {
         private int _x;
         private int _y;
+
 
         public int X { get { return _x; } }
         public int Y { get { return _y; } }
@@ -20,10 +21,7 @@ namespace CardboardWarehouse_Model
             _y = y;
         }
 
-        public Cube()
-        {
-
-        }
+        public Cube() { }
 
         public override string ToString()
         {

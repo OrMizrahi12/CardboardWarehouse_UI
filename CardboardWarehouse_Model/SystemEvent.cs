@@ -6,23 +6,29 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_Model
 {
-    public class SystemEvent
+    public class SystemEvent : IEntity
     {
-        private DateTime _date; 
-        private string ? _name;
+        private readonly DateTime _creationTime; 
+        private readonly string ? _name;
+        private readonly string _id;
+
 
         public SystemEvent(DateTime date, string? name)
         {
-            _date = date;
+            _creationTime = date;
             _name = name;
+            _id = DateTime.Now.Ticks.ToString();
         }
-        public DateTime Date { get { return _date; } }
+        public DateTime Date { get { return _creationTime; } }
         public string ? Name { get { return _name;  } }
 
+        public string Id => _id;
+
+        public DateTime CreationTime => _creationTime;
 
         public override string ToString()
         {
-            return $"Event Name:{_name}\nDate{_date}";
+            return $"Event Name:{_name}\nDate{_creationTime}";
         }
     }
 }

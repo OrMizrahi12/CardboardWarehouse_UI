@@ -12,14 +12,12 @@ namespace CardboardWarehouse_Logic
 {
     public class GiftController
     {
-
         public static void LoadDataToGrid(DataGrid grid)
         {
             JsonDataInformer.LoadGiftsFromJson(PathInfo.GiftsJsonPath);
             JsonLogic.UpdateJsonData(PathInfo.GiftsJsonPath);
             GeneralDataHolder.Gifts.LoadDataToGrid(grid);
         }
-
 
         public static void AddGift(Gift gifts)
         {
@@ -38,7 +36,6 @@ namespace CardboardWarehouse_Logic
                 GeneralDataHolder.Gifts.Remove(gifts);
                 JsonLogic.UpdateJsonData(PathInfo.GiftsJsonPath);
                 LogEventController.AddLogEvent($"The gift {gifts} are deleted");
-
             }
         }
 

@@ -48,6 +48,11 @@ namespace CardboardWarehouse_UI.Pages.Customer
             {
                 ShowMathResult(0, 0, "Not Found", "Red");
                 btnAddToCart.Visibility = Visibility.Hidden;
+                
+                if(SelectedGift != null)
+                {
+                    CartonCustReqController.Add(new Cube(SelectedGift.X + 5, SelectedGift.Y + 5));
+                }
             }
         }
 

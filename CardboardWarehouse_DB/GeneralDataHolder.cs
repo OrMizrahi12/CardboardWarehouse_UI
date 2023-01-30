@@ -27,6 +27,8 @@ namespace CardboardWarehouse_DB
         public static CustomList<BestSeller> BestSellers = new CustomList<BestSeller>();
 
         public static CustomList<SystemEvent> SystemEvents = new CustomList<SystemEvent>();
+
+        public static CustomList<Cube> CartonCustReq = new CustomList<Cube>();
         
         public GeneralDataHolder() { }
     }

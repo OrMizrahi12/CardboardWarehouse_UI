@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_DS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_DS
 {
-    public class CustomList<T>
+    public class CustomList<T> : IListHelper<T>
     {
         private T[] _items = new T[0];
         public event EventHandler? OnAdd;
@@ -81,14 +82,6 @@ namespace CardboardWarehouse_DS
         public void Clear()
         {
             _items = new T[0];
-        }
-        public void Print()
-        {
-            foreach (var item in _items)
-            {
-                Console.Write(item + " ");
-            }
-            Console.WriteLine();
         }
     }
 }

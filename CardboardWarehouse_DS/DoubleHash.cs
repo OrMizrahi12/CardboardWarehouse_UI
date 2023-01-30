@@ -56,17 +56,15 @@ namespace CardboardWarehouse_DS
             var newNode = new Node(value);
             var current = _buckets[index];
 
-            // Check if the value already exists in the hash table
             while (current != null)
             {
                 if (current!.Value!.Equals(value))
                 {
-                    return; // Value already exists, do not add it
+                    return; 
                 }
                 current = current.Next;
             }
 
-            // Add the new value to the hash table
             if (_buckets[index] == null)
             {
                 _buckets[index] = newNode;

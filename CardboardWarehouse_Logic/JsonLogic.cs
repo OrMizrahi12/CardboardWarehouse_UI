@@ -54,8 +54,6 @@ namespace CardboardWarehouse_Logic
                 LogEventController.AddLogEvent("Path Error");
 
             }
-           
-
         }
 
         public static void LoadDataFromJson( string path)
@@ -64,8 +62,6 @@ namespace CardboardWarehouse_Logic
             try
             {
                 string json = File.ReadAllText(path);
-
-
                 Carton[]? cartons = JsonConvert.DeserializeObject<Carton[]>(json);
 
                 if (cartons != null)
@@ -82,7 +78,6 @@ namespace CardboardWarehouse_Logic
                         }
                     }
                 }
-
             }
             catch
             {
@@ -144,7 +139,6 @@ namespace CardboardWarehouse_Logic
             {
                 LogEventController.AddLogEvent("Json Load error");
             }
-
         }
 
         public static void LoadPurchaseFromJson(string path)
@@ -175,7 +169,6 @@ namespace CardboardWarehouse_Logic
             {
                 LogEventController.AddLogEvent("Json Load error");
             }
-
         }
 
         public static void LoadBestSellerFromJson(string path)
@@ -201,7 +194,6 @@ namespace CardboardWarehouse_Logic
             {
                 LogEventController.AddLogEvent("Json Load error");
             }
-
         }
     }
 }

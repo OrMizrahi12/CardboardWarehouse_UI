@@ -1,6 +1,7 @@
 ﻿using CardboardWarehouse_Logic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             InitializeComponent();
             LoadData();
+            RefreshFrid();
         }
 
         private void BtnClearLogEvent_Click(object sender, RoutedEventArgs e)
@@ -35,6 +37,18 @@ namespace CardboardWarehouse_UI.Pages.Admin
         {
             systemEventGrid.Items.Clear();
             LogEventController.LoadLogEventToGrid(systemEventGrid);
+        }
+
+        private void BtnLoadCustReq_Click(object sender, RoutedEventArgs e)
+        {
+            CartonCustReqController.AddReqToStock();
+            RefreshFrid();
+        }
+        
+        private void RefreshFrid()
+        {
+            custReqGrid.Items.Clear(); 
+            CartonCustReqController.LoadDataToGrid(custReqGrid);
         }
     }
 }

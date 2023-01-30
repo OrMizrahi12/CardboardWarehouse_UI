@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_DS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -8,7 +9,7 @@ using System.Windows.Controls;
 
 namespace CardboardWarehouse_DS
 {
-    public class GenericHash<T>
+    public class GenericHash<T> : IHashHelper<T>
     {
         private T[] _table;
         private int _size;
@@ -26,16 +27,21 @@ namespace CardboardWarehouse_DS
         }
 
         // O(1)
+        // item = "bla bla bla 
         public int GetIndex(T item)
         {
+ 
             string key = item?.ToString()!;
             byte[] byteKey = Encoding.UTF8.GetBytes(key);
             byte[] hash;
+            
             using (var sha256 = SHA256.Create())
             {
                 hash = sha256.ComputeHash(byteKey);
             }
+            
             int index = 0;
+            
             for (int i = 0; i < 4; i++)
             {
                 index += hash[i] << (i * 8);
@@ -43,6 +49,7 @@ namespace CardboardWarehouse_DS
 
             return Math.Abs(index % _size);
         }
+        
 
 
         // O(1)

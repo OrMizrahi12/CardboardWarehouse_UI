@@ -1,4 +1,5 @@
 ﻿using CardboardWarehouse_DB;
+using CardboardWarehouse_Logic.Interfaces;
 using CardboardWarehouse_Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Controls;
 
 namespace CardboardWarehouse_Logic
 {
-    public class BestSellersController
+    public class BestSellersController 
     {
         public static void LoadDataToGrid(DataGrid grid)
         {
@@ -30,7 +31,6 @@ namespace CardboardWarehouse_Logic
                 {
                     GeneralDataHolder.BestSellers.Add(new BestSeller(1, carton.Price, carton));
                     JsonDataInformer.UpdateJsonData(PathInfo.BestSellerPath);
-
                 }
             }
         }

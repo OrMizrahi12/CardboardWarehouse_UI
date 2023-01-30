@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardboardWarehouse_DS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,34 +14,34 @@ namespace CardboardWarehouse_DS
         public Node(T data)
         {
             this.data = data;
-            this.next = null;
+            this.next = null!;
         }
     }
 
-    class LinkedList<T>
+    class LinkedList<T> : ILinkedListHelper<T>
     {
-        Node<T> head;
+        Node<T> ? _head;
         private int _count;
 
         public int Count { get { return _count; } }
         public void AddFirst(T data)
         {
             Node<T> newNode = new Node<T>(data);
-            newNode.next = head;
-            head = newNode;
+            newNode.next = _head!;
+            _head = newNode;
             _count++;
         }
 
         public void AddLast(T data)
         {
             Node<T> newNode = new Node<T>(data);
-            if (head == null)
+            if (_head == null)
             {
-                head = newNode;
+                _head = newNode;
                 _count++;
                 return;
             }
-            Node<T> current = head;
+            Node<T> current = _head;
             while (current.next != null)
             {
                 current = current.next;
@@ -51,31 +52,31 @@ namespace CardboardWarehouse_DS
         }
         public T RemoveLast()
         {
-            if (head == null)
+            if (_head == null)
             {
                 return default!;
             }
-            else if (head.next == null)
+            else if (_head.next == null)
             {
-                T data = head.data;
-                head = null!;
+                T data = _head.data;
+                _head = null!;
                 _count--;
                 return data;
             }
-            Node<T> current = head;
+            Node<T> current = _head;
             while (current.next.next != null)
             {
                 current = current.next;
             }
             T lastData = current.next.data;
             _count--;
-            current.next = null;
+            current.next = null!;
             return lastData;
         }
 
         public void PrintList()
         {
-            Node<T> current = head;
+            Node<T> current = _head!;
             while (current != null)
             {
                 Console.Write(current.data + " ");

@@ -1,4 +1,5 @@
 ﻿using CardboardWarehouse_DS;
+using CardboardWarehouse_Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace CardboardWarehouse_Logic
 {
-    public class ValidationController
+    public class ValidationController : IValidationHelper
     {
-        private int _numberOfValidation;
-        private CustomList<string> _customList;
+        private readonly int _numberOfValidation;
+        private readonly CustomList<string> _customList;
+
         public ValidationController(int numberOfValidation)
         {
             _numberOfValidation = numberOfValidation;
@@ -38,7 +40,6 @@ namespace CardboardWarehouse_Logic
             }
 
         }
-
         public void StringValidation(string input, int fromRange = 2, int toRange = 10)
         {
             if(input.Length >= fromRange && input.Length <= toRange)
@@ -56,7 +57,7 @@ namespace CardboardWarehouse_Logic
                 }
             }
         }
-        private static bool NotNull(string input)
+        public bool NotNull(object input)
         {
             return input != null;
         }
