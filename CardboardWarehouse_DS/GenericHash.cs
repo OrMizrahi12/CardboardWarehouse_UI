@@ -27,7 +27,6 @@ namespace CardboardWarehouse_DS
         }
 
         // O(1)
-        // item = "bla bla bla 
         public int GetIndex(T item)
         {
  
@@ -51,7 +50,6 @@ namespace CardboardWarehouse_DS
         }
         
 
-
         // O(1)
         public void Add(T item)
         {
@@ -65,7 +63,6 @@ namespace CardboardWarehouse_DS
                     _itensCount++;
                     _table[index] = item;
                 }
-
             }
             else
             {

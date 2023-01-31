@@ -45,20 +45,20 @@ namespace CardboardWarehouse_DS
 
         public override int GetHashCode()
         {
-            return (this.Key.GetHashCode() << 16) | (this.Value.GetHashCode() & 0xFFFF);
+            return (this.Key!.GetHashCode() << 16) | (this.Value!.GetHashCode() & 0xFFFF);
         }
 
         //Two nodes are equal if their both keys and values match.
         public override bool Equals(object obj)
         {
-            AVLNode<TKey, TValue> node = obj as AVLNode<TKey, TValue>;
+            AVLNode<TKey, TValue> ? node = obj as AVLNode<TKey, TValue>;
             if (node == null)
             {
                 return false;
             }
             else
             {
-                if (this.Key.Equals(node.Key) && this.Value.Equals(node.Value))
+                if (this.Key!.Equals(node.Key) && this.Value!.Equals(node.Value))
                 {
                     return true;
                 }
@@ -80,7 +80,7 @@ namespace CardboardWarehouse_DS
 
         public AVLTree()
         {
-            this.root = null;
+            this.root = null!;
         }
         public void Insert(TKey key, TValue value)
         {
@@ -182,7 +182,7 @@ namespace CardboardWarehouse_DS
         private void RotateRightRight(AVLNode<TKey, TValue> node)
         {
             AVLNode<TKey, TValue> rightChild = node.RightChild;
-            AVLNode<TKey, TValue> rightLeftChild = null;
+            AVLNode<TKey, TValue> rightLeftChild = null!;
             AVLNode<TKey, TValue> parent = node.Parent;
 
             if (rightChild != null)
@@ -194,8 +194,8 @@ namespace CardboardWarehouse_DS
                 node.Balance = -rightChild.Balance;
             }
 
-            node.RightChild = rightLeftChild;
-            node.Parent = rightChild;
+            node.RightChild = rightLeftChild!;
+            node.Parent = rightChild!;
 
             if (rightLeftChild != null)
             {
@@ -203,22 +203,22 @@ namespace CardboardWarehouse_DS
             }
             if (node == this.root)
             {
-                this.root = rightChild;
+                this.root = rightChild!;
             }
             else if (parent.RightChild == node)
             {
-                parent.RightChild = rightChild;
+                parent.RightChild = rightChild!;
             }
             else
             {
-                parent.LeftChild = rightChild;
+                parent.LeftChild = rightChild!;
             }
         }
 
         private void RotateLeftLeft(AVLNode<TKey, TValue> node)
         {
             AVLNode<TKey, TValue> leftChild = node.LeftChild;
-            AVLNode<TKey, TValue> leftRightChild = null;
+            AVLNode<TKey, TValue> leftRightChild = null!;
             AVLNode<TKey, TValue> parent = node.Parent;
 
             if (leftChild != null)
@@ -230,7 +230,7 @@ namespace CardboardWarehouse_DS
                 node.Balance = -leftChild.Balance;
             }
 
-            node.Parent = leftChild;
+            node.Parent = leftChild!;
             node.LeftChild = leftRightChild;
 
             if (leftRightChild != null)
@@ -240,15 +240,15 @@ namespace CardboardWarehouse_DS
 
             if (node == this.root)
             {
-                this.root = leftChild;
+                this.root = leftChild!;
             }
             else if (parent.LeftChild == node)
             {
-                parent.LeftChild = leftChild;
+                parent.LeftChild = leftChild!;
             }
             else
             {
-                parent.RightChild = leftChild;
+                parent.RightChild = leftChild!;
             }
 
         }
@@ -256,8 +256,8 @@ namespace CardboardWarehouse_DS
         private void RotateRightLeft(AVLNode<TKey, TValue> node)
         {
             AVLNode<TKey, TValue> rightChild = node.RightChild;
-            AVLNode<TKey, TValue> rightLeftChild = null;
-            AVLNode<TKey, TValue> rightLeftRightChild = null;
+            AVLNode<TKey, TValue> rightLeftChild = null!;
+            AVLNode<TKey, TValue> rightLeftRightChild = null!;
 
             if (rightChild != null)
             {
@@ -268,25 +268,25 @@ namespace CardboardWarehouse_DS
                 rightLeftRightChild = rightLeftChild.RightChild;
             }
 
-            node.RightChild = rightLeftChild;
+            node.RightChild = rightLeftChild!;
 
             if (rightLeftChild != null)
             {
                 rightLeftChild.Parent = node;
-                rightLeftChild.RightChild = rightChild;
+                rightLeftChild.RightChild = rightChild!;
                 rightLeftChild.Balance--;
             }
 
             if (rightChild != null)
             {
-                rightChild.Parent = rightLeftChild;
+                rightChild.Parent = rightLeftChild!;
                 rightChild.LeftChild = rightLeftRightChild;
                 rightChild.Balance--;
             }
 
             if (rightLeftRightChild != null)
             {
-                rightLeftRightChild.Parent = rightChild;
+                rightLeftRightChild.Parent = rightChild!;
             }
 
             RotateRightRight(node);
@@ -296,13 +296,13 @@ namespace CardboardWarehouse_DS
         {
             AVLNode<TKey, TValue> leftChild = node.LeftChild;
             AVLNode<TKey, TValue> leftRightChild = leftChild.RightChild;
-            AVLNode<TKey, TValue> leftRightLeftChild = null;
+            AVLNode<TKey, TValue> leftRightLeftChild = null!;
             if (leftRightChild != null)
             {
                 leftRightLeftChild = leftRightChild.LeftChild;
             }
 
-            node.LeftChild = leftRightChild;
+            node.LeftChild = leftRightChild!;
 
             if (leftRightChild != null)
             {
@@ -313,14 +313,14 @@ namespace CardboardWarehouse_DS
 
             if (leftChild != null)
             {
-                leftChild.Parent = leftRightChild;
+                leftChild.Parent = leftRightChild!;
                 leftChild.RightChild = leftRightLeftChild;
                 leftChild.Balance++;
             }
 
             if (leftRightLeftChild != null)
             {
-                leftRightLeftChild.Parent = leftChild;
+                leftRightLeftChild.Parent = leftChild!;
             }
 
             RotateLeftLeft(node);
@@ -345,16 +345,16 @@ namespace CardboardWarehouse_DS
                     {
                         if (current == root)
                         {
-                            root = null;
+                            root = null!;
                         }
                         else if (current.Parent.RightChild == current)
                         {
-                            current.Parent.RightChild = null;
+                            current.Parent.RightChild = null!;
                             DeleteBalanceTree(current.Parent, 1);
                         }
                         else
                         {
-                            current.Parent.LeftChild = null;
+                            current.Parent.LeftChild = null!;
                             DeleteBalanceTree(current.Parent, -1);
                         }
                     }
@@ -420,11 +420,11 @@ namespace CardboardWarehouse_DS
                 {
                     if (subtreeNode.Parent.LeftChild == subtreeNode)
                     {
-                        subtreeNode.Parent.LeftChild = null;
+                        subtreeNode.Parent.LeftChild = null!;
                     }
                     else
                     {
-                        subtreeNode.Parent.RightChild = null;
+                        subtreeNode.Parent.RightChild = null!;
                     }
                 }
             }
@@ -486,7 +486,7 @@ namespace CardboardWarehouse_DS
                         addBalance = 1;
                     }
                 }
-                node = parent;
+                node = parent!;
             }
         }
         public bool TryGetValue(TKey key, out TValue result)
@@ -508,7 +508,7 @@ namespace CardboardWarehouse_DS
                     return true;
                 }
             }
-            result = default(TValue);
+            result = default!;
             return false;
         }
 
